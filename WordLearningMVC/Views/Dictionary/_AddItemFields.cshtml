@@ -1,0 +1,117 @@
+﻿@using System.Web.UI.WebControls
+@using WordLearningMVC.Models
+@model WordLearningMVC.Models.DictionaryModel 
+
+<script type="text/javascript" src="~/Content/js/keyboardTranscription.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/keyboard.css">
+
+@using (Html.BeginForm("AddItemFromForm", "Dictionary", Model, FormMethod.Post))
+{
+    <a data-toggle="modal" style="width: 100%" href="#myModal" class="btn btn-info btn-sm">@Resources.Resources.txtAddItemForm</a>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title">@Resources.Resources.txtAddItemForm</h2>
+                </div>
+                
+                <div class="modal-body" >
+                    @if (Model.CanShow == true && !string.IsNullOrWhiteSpace(Model.MessageForAdd))
+                    {
+                        <div id="AddedMessage">
+                            <p class="text-primary" style="font-size: 1.5em;background-color:yellow;"><strong>@Model.MessageForAdd</strong></p>
+                        </div>
+                    }
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtOriginalWord</label>
+                        <span class="field-validation-valid" data-valmsg-for="AddTranslation.OriginalWord" data-valmsg-replace="true"></span>
+                        <div class="input-group" style="width: 100%">
+                            <input class="form-control" style="width: 80%" data-val="true" data-val-required="@string.Format(Resources.Resources.msgRequiredField, Resources.Resources.txtOriginalWord)" id="AddTranslation_OriginalWord" name="AddTranslation.OriginalWord" type="text" value="" autocomplete="off">
+                            <span style="color: red">   *</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtOriginalLanguage</label>
+                        <div class="input-group" style="width: 100%">
+                            <select id="AddTranslation_OriginalLang" name="AddTranslation.OriginalLang" class="form-control" style="width: 40%">
+                                @foreach (var lang in Model.OrigLanguages)
+                                {
+                                    if (Session["OriginalLanguage"].ToString() == lang)
+                                    {
+                                        <option selected>@lang</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@lang</option>
+                                    }
+                                }
+                            </select>
+                            <span style="color: red">   *</span>
+                        </div>
+                        
+                    </div>
+                    <br />
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtTranslationWord</label>
+                        <span class="field-validation-valid" data-valmsg-for="AddTranslation.TranslWord" data-valmsg-replace="true"></span>
+                        <div class="input-group" style="width: 100%">
+                            <input class="form-control" style="width: 80%" data-val="true" data-val-required="@string.Format(Resources.Resources.msgRequiredField, Resources.Resources.txtTranslationWord)" id="AddTranslation_TranslWord" name="AddTranslation.TranslWord" type="text" value="" autocomplete="off">
+                            <span style="color: red">   *</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtTranslationLanguage</label>
+                        <div class="input-group" style="width: 100%">
+                            <select id="AddTranslation_TranslLang" name="AddTranslation.TranslLang" class="form-control" style="width: 40%">
+                                @foreach (var lang in Model.TransLanguages)
+                                {
+                                    if (Session["TranslationLanguage"].ToString() == lang.ToString())
+                                    {
+                                        <option selected>@lang</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@lang</option>
+                                    }
+                                }
+                            </select>
+                            <span style="color: red">   *</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtTranscription</label>
+                    </div>
+                    <div>
+                        <input class="form-control keyboardInput" style="width: 80%" id="AddTranslation_Transcription" name="AddTranslation.Transcription" type="text" value="" autocomplete="off">
+                    </div>
+                    <br />
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtPartOfSpeech</label>
+                        <select id="AddTranslation_PartOfSpeach" name="AddTranslation.PartOfSpeach" class="form-control">
+                            @foreach (var part in Model.PartOfSpeaches)
+                            {
+                                <option>@part</option>
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    <div>
+                        <label class="text-muted">@Resources.Resources.txtTags</label>
+                        
+                        <input type="text" class="form-control" id="tokenfieldTags" value="" style="width: 90%"/>
+                        <input class="form-control" id="AddTranslation_TagsList" name="AddTranslation.TagsList" type="text" style="visibility: hidden" value="" autocomplete="off">
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="save" onclick="readTags()" value="continue">@Resources.Resources.txtAddMoreTransl</button>
+                        <button type="submit" class="btn btn-primary" name="save" onclick="readTags()" value="save">@Resources.Resources.txtSave</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">@Resources.Resources.txtHideButton</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

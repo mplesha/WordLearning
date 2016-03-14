@@ -1,0 +1,86 @@
+﻿@using System.Linq
+@model WordLearningMVC.Models.RegisterModel
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    <div class="modal fade" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width: 290px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h2 class="modal-title">@Resources.Resources.txtRegister</h2>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.UserName, new {@class = "form-control has-error"})
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+        
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.Password, new {@class = "form-control has-error", @type = "password"})
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+        
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ConfirmPassword, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.ConfirmPassword, new {@class = "form-control has-error", @type = "password"})
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control has-error"})
+                        @Html.ValidationMessageFor(model => model.FirstName)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.LastName, new {@class = "form-control has-error"})
+                        @Html.ValidationMessageFor(model => model.LastName)
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.DateOfBirth, new {@class = "form-control has-error", @type = "date"})
+                        @Html.ValidationMessageFor(model => model.DateOfBirth)
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="Sex">@Resources.Resources.txtSex</label>
+                        <select class=" form-control" data-width="17%" name="Sex">
+                            <option>@Resources.Resources.txtChooseGender</option>
+                            <option id="true" value="true">@Resources.Resources.txtMale</option>
+                            <option id="false" value="false">@Resources.Resources.txtFemale</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.Email, new {@class = "form-control has-error"})
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+       
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PhoneNumber, new {@class = "control-label"})
+                        @Html.TextBoxFor(model => model.PhoneNumber, new {@class = "form-control ", @id = "maskTest", @autocomplete = "on"})
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                            @Resources.Resources.txtRegister
+                        </button>
+                        <button type="button" id="close" class="btn btn-primary" data-dismiss="modal">@Resources.Resources.txtClose</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Content/js/jquerymaskedinput.js"></script>
+<script>
+  
+        $(function ($) {
+            $("#maskTest").mask("+38-(999)-999-99-99");
+        });
+</script>

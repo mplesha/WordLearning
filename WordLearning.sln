@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{C14934B4-70FF-4D42-AAD8-BCA09B34EE32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{7F387631-4DEA-4A14-82FF-94E6D2C64D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordLearningMVC", "WordLearningMVC\WordLearningMVC.csproj", "{32643C93-FE98-420D-BD3A-6193BC6A3747}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{D49AD535-4956-4FD7-A6E8-70745D35DA2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorDB", "GeneratorDB\GeneratorDB.csproj", "{8FA8BE7A-834C-44A7-8570-2624D1245BF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{01A1FBBF-960E-4C29-9941-C0ADF78644BE}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs12:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BusinessLayer\\BusinessLayer.csproj
+		SccProjectName1 = BusinessLayer
+		SccLocalPath1 = BusinessLayer
+		SccProjectUniqueName2 = DataAccessLayer\\DataAccessLayer.csproj
+		SccProjectName2 = DataAccessLayer
+		SccLocalPath2 = DataAccessLayer
+		SccProjectUniqueName3 = GeneratorDB\\GeneratorDB.csproj
+		SccProjectName3 = GeneratorDB
+		SccLocalPath3 = GeneratorDB
+		SccProjectUniqueName4 = Resources\\Resources.csproj
+		SccProjectName4 = Resources
+		SccLocalPath4 = Resources
+		SccProjectUniqueName5 = UnitTests\\UnitTests.csproj
+		SccProjectName5 = UnitTests
+		SccLocalPath5 = UnitTests
+		SccProjectUniqueName6 = WordLearningMVC\\WordLearningMVC.csproj
+		SccProjectName6 = WordLearningMVC
+		SccLocalPath6 = WordLearningMVC
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C14934B4-70FF-4D42-AAD8-BCA09B34EE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14934B4-70FF-4D42-AAD8-BCA09B34EE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14934B4-70FF-4D42-AAD8-BCA09B34EE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14934B4-70FF-4D42-AAD8-BCA09B34EE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F387631-4DEA-4A14-82FF-94E6D2C64D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F387631-4DEA-4A14-82FF-94E6D2C64D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F387631-4DEA-4A14-82FF-94E6D2C64D43}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7F387631-4DEA-4A14-82FF-94E6D2C64D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F387631-4DEA-4A14-82FF-94E6D2C64D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32643C93-FE98-420D-BD3A-6193BC6A3747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32643C93-FE98-420D-BD3A-6193BC6A3747}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32643C93-FE98-420D-BD3A-6193BC6A3747}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32643C93-FE98-420D-BD3A-6193BC6A3747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49AD535-4956-4FD7-A6E8-70745D35DA2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49AD535-4956-4FD7-A6E8-70745D35DA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49AD535-4956-4FD7-A6E8-70745D35DA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49AD535-4956-4FD7-A6E8-70745D35DA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FA8BE7A-834C-44A7-8570-2624D1245BF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FA8BE7A-834C-44A7-8570-2624D1245BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FA8BE7A-834C-44A7-8570-2624D1245BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FA8BE7A-834C-44A7-8570-2624D1245BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01A1FBBF-960E-4C29-9941-C0ADF78644BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01A1FBBF-960E-4C29-9941-C0ADF78644BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01A1FBBF-960E-4C29-9941-C0ADF78644BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01A1FBBF-960E-4C29-9941-C0ADF78644BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

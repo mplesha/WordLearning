@@ -1,0 +1,124 @@
+﻿@model IList<DataAccessLayer.Entities.Progress>
+
+@{
+    ViewBag.Title = Resources.Resources.txtViewCourses;
+    var visiblebtn = "";
+
+    var myModal = 100;
+
+    var student = ViewBag.Student;
+    var items = ViewBag.Teachers;
+
+    List<SelectListItem> list = new List<SelectListItem>();
+
+    foreach (var item in items)
+    {
+        var val = item.Profile.Id.ToString();
+        list.Add(new SelectListItem() { Text = item.Profile.FullName, Value = val });
+    }
+}
+
+ <div align="left">
+        <span class="label label-primary">@Resources.Resources.txtStudentCourses</span>
+        <span class="label label-primary">@student</span>
+    </div>
+
+    <table class="table table-bordered table-hover own-grid">
+        <thead>
+            <tr>
+                <th>
+                    @Resources.Resources.txtName
+                </th>
+                <th>
+                    @Resources.Resources.txtLanguage
+                </th>
+                <th>@Resources.Resources.txtStatus
+                </th>
+                <th>
+                    @Resources.Resources.txtTeacher
+                </th>
+                <th>
+                    @Resources.Resources.txtRemove
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Course.Name
+                    </td>
+                    <td>
+                        @if (item.Course.Language == null)
+                        {@Resources.Resources.txtMultilingual }
+                        else
+                        {
+                            @item.Course.Language.Lang
+                        }
+                    </td>
+
+                    @if (item.Status > 0.9)
+                    {
+                        <td style="vertical-align: middle" align="center">
+                            <img src="../../Images/Finished.png" width="25" height="25" title="Completed" />
+                        </td>
+                    }
+                    else
+                    {
+                        if (item.Status > 0)
+                        {<td>In progress</td>}
+                        else
+                        {<td>Not started</td>}
+                    }
+                    <td>
+
+                        @{ 
+                    myModal = myModal + 1;
+                        }
+                        @using (Html.BeginForm("AssignTeacher", "Manager", new { courseId = item.CourceId, studentId = item.StudentId }))
+                        {    
+                            @item.Teacher.Profile.FullName
+                                                
+                            <a data-toggle="modal" href="#@myModal" class="btn btn-primary btn-sm">@Resources.Resources.txtChange</a>
+
+                            <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">@Resources.Resources.txtChangeTeacher</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h2 class="label label-primary">@item.Teacher.Profile.FullName</h2>
+                                            <br />
+                                            <br />
+                                            @Html.DropDownList("Teachers", list, new { @class = "btn btn-default" })
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">@Resources.Resources.txtCancel</button>
+                                                <button type="submit" class="btn btn-primary">@Resources.Resources.txtSave</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        @{
+                        if ((item.Status == 0) || (item.Status > 0.9)) { visiblebtn = ""; }
+                        else { visiblebtn = "disabled"; }
+                        }
+                        <button onclick=" AreYouSure(name) "
+                               name="@Url.Action("DeleteStudentCourse", "Manager", new { progressId = item.Id, studentId = item.StudentId })"
+                               class="btn btn-default btn-sm dropdown-toggle own-button" type="submit" @visiblebtn>@Resources.Resources.txtRemove</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.Count > 0)
+    {
+        @Html.Partial("_Paging", Model, new ViewDataDictionary { { "studentId", Model[0].StudentId } })
+    }
+    <button class="btn btn-default btn-sm dropdown-toggle own-button" onclick=" window.location.href = '@Url.Action("StudentList", "Manager", new { page=Session["StudentListPage"] })' " name="Back">@Resources.Resources.txtBack</button>

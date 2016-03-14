@@ -1,0 +1,45 @@
+﻿<script type="text/javascript">
+    window.history.forward();
+</script>
+@using BusinessLayer.Models
+@model IList<ItemTranslationModel> 
+<script type="text/javascript" src="~/Content/js/keyboard.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="~/Content/css/keyboard.css">
+@{
+    ViewBag.Title = @Resources.Resources.txtRunQuiz;   
+}
+<h1 align="center">@Resources.Resources.msgCaseLetters </h1>
+
+
+@using (Html.BeginForm("QuizAnswers", "Quiz"))
+{
+    <div id="grid-list" class="contentgrid" style="width:500px;">
+        <div align="Left"><span class="label label-primary">@Resources.Resources.txtQuiz</span></div>
+        <table class="table table-bordered table-hover own-grid">
+            <thead>
+                <tr>
+                    <th>@Resources.Resources.txtItem</th>
+                    <th>@Resources.Resources.txtTranslation</th>
+                </tr>
+            </thead>      
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    @Html.HiddenFor(modelitem => Model[i].Item)
+                    @Html.HiddenFor(modelitem => Model[i].Translation)
+                    @Html.HiddenFor(modelitem => Model[i].Id)
+                    @Html.HiddenFor(modelitem => Model[i].WordSuiteIdFrom)
+                   
+                    <tr>
+                        <td>@Model[i].Translation</td>
+                        <td><input type="text" value="" name="userTranslations" class="keyboardInput"></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+     
+         <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtConfirm</button>
+    </div>
+}
+
+        

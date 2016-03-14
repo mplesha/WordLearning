@@ -1,0 +1,13 @@
+﻿@*@Scripts.Render("~/Content/js/printpage.js")*@
+@model IList<BusinessLayer.Models.WordSuiteTranslationsModel>
+@{
+    ViewBag.Title = @Resources.Resources.txtViewItems;
+}
+@using (Ajax.BeginForm("StudentCourses", "Teacher",
+    new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging" }))
+{
+    <div class="contentgrid" id="grid-list">
+        @Html.Partial("_WordSuiteTranslations")
+    </div>
+}    
+

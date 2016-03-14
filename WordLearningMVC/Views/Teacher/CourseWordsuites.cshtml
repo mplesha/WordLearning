@@ -1,0 +1,15 @@
+﻿@model IList<BusinessLayer.Models.CourseWordSuitesModel>
+
+@{
+    ViewBag.Title = Resources.Resources.txtCourseWordsuites;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm("ViewTranslations", "Teacher",
+    new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging" }))
+{
+    <div class="contentgrid" id="grid-list">
+        @Html.Partial("_CourseWordSuites")
+    </div>
+}
+

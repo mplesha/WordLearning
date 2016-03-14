@@ -1,0 +1,59 @@
+﻿@using DataAccessLayer.Enums
+@using WordLearningMVC
+
+@{
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p style="float: right">
+        @currentUser.User.Profile.FirstName @currentUser.User.Profile.LastName
+        (@currentUser.User.PersonRole.ToString())
+        @Html.ActionLink(Resources.Resources.txtLogOut, "LogOff", "Account")
+    </p>
+    
+    if (currentUser.User.PersonRole == PersonRole.Admin)
+    {
+        <li>@Html.ActionLink(Resources.Resources.txtHome, "AdminPage", "Admin")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtCreateUser, "Register", "Account")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtLanguages, "Language", "Admin")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtSettings, "ChangeSettings", "Admin")</li>
+    }
+
+    if (currentUser.User.PersonRole == PersonRole.Manager)
+    {
+        <li>@Html.ActionLink(Resources.Resources.txtStudents, "StudentList", "Manager")</li>
+    }
+
+    if (currentUser.User.PersonRole == PersonRole.Teacher)
+    {
+        <li>@Html.ActionLink(Resources.Resources.txtMyStudents, "TeacherStudents", "Teacher")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtDictionary, "Dictionary", "Dictionary")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtCourses, "AllCourses", "Teacher")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtWordSuites, "CreateWordSuite", "Student")</li>
+    }
+
+    if (currentUser.User.PersonRole == PersonRole.Student)
+    {
+        <li>@Html.ActionLink(Resources.Resources.txtMyWork, "MyWork", "Student")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtWordSuites, "PrivateCourseWordSuites", "Student")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtCreateWordSuite, "CreateWordSuite", "Student")</li>
+    }
+
+    if (currentUser.User.PersonRole == PersonRole.Listener)
+    {
+        <li>@Html.ActionLink(Resources.Resources.txtWordSuites, "PrivateCourseWordSuites", "Student")</li>
+        <li>@Html.ActionLink(Resources.Resources.txtCreateWordSuite, "CreateWordSuite", "Student")</li>
+    }
+}
+
+else
+{
+    <div class="logo"></div>
+    <p style="float: right">
+        @Resources.Resources.msgToGuest
+        <a data-toggle="modal" href="#modalLogin">@Resources.Resources.txtLogin</a>@Resources.Resources.txtOr
+        <a data-toggle="modal" href="#modalRegister">@Resources.Resources.txtRegister</a>
+    </p>
+}

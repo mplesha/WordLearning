@@ -1,0 +1,120 @@
+﻿@using WordLearningMVC.Models
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image: url('../../Images/softserve-language-school.jpg');"></div>
+            <div class="carousel-caption">
+            </div>
+        </div>
+
+        <div class="item">
+            <div class="fill" style="background-image: url('../../Images/banner-1.jpg');"></div>
+            <div class="carousel-caption">
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image: url('../../Images/30859_LivingLanguage_billboard_banner_v1.jpg');"></div>
+            <div class="carousel-caption">
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </div>
+    <div class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </div>
+</div>
+
+<div class="info">
+    <br />
+
+
+    <h2 align="center">@Resources.Resources.msgInfoHelloFriend</h2>
+
+
+    <h3>@Resources.Resources.msgInfoQuestions</h3>
+    <h3>@Resources.Resources.msgInfoQuestions_2</h3>
+    <h3>@Resources.Resources.msgInfoQuestions_3</h3>
+    <h3>@Resources.Resources.msgInfoQuestions_4</h3>
+
+    <h3 align="center">@Resources.Resources.msgInfoItsForYou</h3>
+    <h2 align="center">    @Resources.Resources.msgInfoWordLearn</h2>
+
+
+    <h3>@Resources.Resources.msgInfoAdvantages</h3>
+
+    <ul style="font-size: 15px;"><br/>
+        <li>@Resources.Resources.msgInfoAdvantages_1</li>
+        <li>@Resources.Resources.msgInfoAdvantages_2</li>
+
+        <li>@Resources.Resources.msgInfoAdvantages_3</li>
+        <li>@Resources.Resources.msgInfoAdvantages_4</li>
+        <li>@Resources.Resources.msgInfoAdvantages_5</li>
+    </ul>
+    <br />
+
+    <p style="font-size: 15px;">@Resources.Resources.msgInfoAdvantages_6</p>
+
+    <br />
+    <p style="font-size: 15px;">@Resources.Resources.msgInfoHappyWordLearn
+        @Resources.Resources.msgInfoWordLearnTeam
+    </p>
+    <br />
+    @if (Model == null)
+    {
+        @Html.Partial("_ModalLogin")
+        @Html.Partial("_ModalRegister")
+    }
+    else
+    {
+        if (Model is LoginModel)
+        {
+            
+        @Html.Partial("_ModalLogin")
+        @Html.Partial("_ModalRegister", new RegisterModel())
+        }
+        else
+        {
+        @Html.Partial("_ModalLogin", new LoginModel())
+        @Html.Partial("_ModalRegister")
+        }
+    }
+</div>
+
+<!-- JavaScript -->
+@*<script src="../../Content/js/jquery-1.10.2.js"></script>*@
+<script src="../../Content/js/bootstrap.js"></script>
+@*<script src="../../Content/js/modal-login-register.js"></script>*@
+<script src="~/Content/js/modal-login-register.js"></script>
+
+<!-- Script to Activate the Carousel -->
+<script>
+    $('.carousel').carousel({
+        interval: 2000 //changes the speed
+    })
+</script>
+
+@if (Model is LoginModel)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#modalLogin').modal('show');
+        });
+    </script>
+}
+

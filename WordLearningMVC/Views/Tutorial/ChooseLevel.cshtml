@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Choose level";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    const int easyLevel = 7;
+    const int normalLevel = 5;
+    const int hardLevel = 3;
+}
+
+<div align="center">
+    <h6 align="center"><span class="label label-primary">Choose level</span></h6><br>
+</div>
+
+<br />
+<br />
+<br />
+
+<div align="center">
+    <input type="button" id="option1" value="easy" onclick="window.location.href = '@Url.Action("Index", "Tutorial", new { wordsuiteId = Model, time = easyLevel })    '" class="btn btn-default" />
+    <input type="button" id="option2" value="normal" onclick="window.location.href = '@Url.Action("Index", "Tutorial", new { wordsuiteId = Model, time = normalLevel })    '" class="btn btn-default " />
+    <input type="button" id="option3" value="hard" onclick="window.location.href = '@Url.Action("Index", "Tutorial", new { wordsuiteId = Model, time = hardLevel })    '" class="btn btn-default " />
+</div>
+
+
+

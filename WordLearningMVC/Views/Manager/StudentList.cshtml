@@ -1,0 +1,39 @@
+﻿@model IList<DataAccessLayer.Entities.User>
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = Resources.Resources.txtManager;
+}
+<br />
+<div class="contentgrid">
+    @if (!Request.IsAjaxRequest())
+    {
+        using (Html.BeginForm("StudentList", "Manager", new AjaxOptions { UpdateTargetId = "grid-list" }))
+        {
+        <div class="modal-content" style="width: 350px;">
+            <div class="form-group">
+                <div align="left">
+                    <span class="label label-primary">@Resources.Resources.msgFindStudent</span>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" id="appendedInputButton" name="studentname" placeholder="Name" /></td>
+                        <td>
+                            <button type="submit" class="btn btn-default">@Resources.Resources.txtSearch</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        }
+    }
+</div>
+<div class="contentgrid" id="grid-list">
+    @Html.Partial("_StudentList")
+</div>
+
+
+
+

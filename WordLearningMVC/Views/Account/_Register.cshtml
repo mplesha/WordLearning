@@ -1,0 +1,97 @@
+﻿@using System.Web.Mvc.Html
+@using BusinessLayer.Managers
+@using DataAccessLayer.Enums
+@using WordLearningMVC.Models
+
+<br />
+@model RegisterModel
+@{
+    string pass = (new AdminManager()).CreatePassword(8);
+    Layout = "../Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Register", "Account", new RegisterModel { Password = pass, ConfirmPassword = pass }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Resources.Resources.txtEnterData</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+      
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", @type = "date" })
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="Sex">@Resources.Resources.txtSex</label>
+            <select class="form-control" data-width="17%" name="Sex">
+                <option value="null">@Resources.Resources.txtChooseGender</option>
+                <option id="true" value="true">@Resources.Resources.txtMale</option>
+                <option id="false" value="false">@Resources.Resources.txtFemale</option>
+            </select>
+            @Html.ValidationMessageFor(model=>model.Sex)
+        </div>
+                        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" ,@id = "maskTest"})
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="PersonRole">@Resources.Resources.txtPersonRole</label>
+            <select class="form-control" data-width="17%" name="PersonRole">
+                <option>@Resources.Resources.txtChooseRole</option>
+                <option id="@PersonRole.Admin" >@PersonRole.Admin</option>
+                <option id="@PersonRole.Listener" >@PersonRole.Listener</option>
+                <option id="@PersonRole.Manager" >@PersonRole.Manager</option>
+                <option id="@PersonRole.Student">@PersonRole.Student</option>
+                <option id="@PersonRole.Teacher">@PersonRole.Teacher</option>
+            </select>
+             @Html.ValidationMessageFor(model=>model.PersonRole)
+        </div>
+
+
+        <p>
+            <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">
+                @Resources.Resources.txtRegister
+            </button>
+        </p>
+    </fieldset>
+}
+
+@section Scripts
+{
+    <script src="~/Content/js/jquerymaskedinput.js"></script>
+    <script >
+        $(function($) {
+                $("#maskTest").mask("+38-(999)-999-99-99");
+            }
+        );
+    </script>
+}
+

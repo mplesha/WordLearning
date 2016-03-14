@@ -1,0 +1,32 @@
+﻿@using System.Net.Mime
+@using DataAccessLayer.Entities
+@using DataAccessLayer.Enums
+@using WordLearningMVC
+
+@model BusinessLayer.Models.LanguageModel
+@{
+    ViewBag.Title = Resources.Resources.txtCreateWordSuite;
+}
+<div class="contentgrid">
+    @if (!Request.IsAjaxRequest())
+    {
+        using (Html.BeginForm("AddWordSuite", "Student"))
+        {
+            <div class="modal-content">
+                <div class="form-group">
+                    <div align="left">
+                        <span class="label label-primary">@Resources.Resources.txtToCreateWS</span>
+                    </div>
+                    <table align="center">
+                        <tr>
+                            <td>@Html.DropDownList("newWordSuiteLanguage", Model.LanguageItems, "Select a language", new { @class = "form-control" })</td>
+                            <td><input type="text" name="newWordSuiteName" placeholder="Enter wordsuite name" class="form-control"></td>
+                            <td><button type="submit" class="btn btn-default">@Resources.Resources.txtCreateWordSuite</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+</div>
+@Html.Action("WordSuitesData", "Student", new { newWordSuite = true,returnUrl=Request.RawUrl,page=Model.CurrentPage})

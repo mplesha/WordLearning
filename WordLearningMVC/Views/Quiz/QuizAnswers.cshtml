@@ -1,0 +1,47 @@
+﻿@using WordLearningMVC
+@model BusinessLayer.Models.QuizModel
+
+@{
+    ViewBag.Title = @Resources.Resources.txtQuizAnswers;
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+
+}
+
+@using (Html.BeginForm("ViewItems", "Student"))
+{
+    @Html.Hidden("wordSuiteId", Model.WordSuiteId)
+    @Html.Hidden("returnUrl",Request.RawUrl)
+    <div id="grid-list" class="contentgrid">
+        <div align="Left"><span class="label label-primary">@Resources.Resources.txtQuizAnswers</span></div>
+        <table class="table table-bordered table-hover own-grid">
+            <thead>
+                <tr>
+                    <th>@Resources.Resources.txtItem</th>
+                    <th>@Resources.Resources.txtUserTranslation</th>
+                    <th>@Resources.Resources.txtRightTranslation</th>
+                    <th>@Resources.Resources.txtAnswerIsCorrect</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Item.Count; i++)
+                {
+
+
+                    <tr>
+                        <td>@Model.Item[i]</td>
+                        <td>@Model.UserTranslation[i]</td>
+                        <td>@Model.Translation[i]</td>
+                        <td style="vertical-align: bottom" align="center">
+                            @if (Model.isCorrectTranslation[i])
+                            {<img src="../../Images/Finished.png" width="25" height="25" />}
+                            else
+                            {<img src="../../Images/NotStarted.png" width="25" height="25" />}
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtOk</button>
+    </div>
+}

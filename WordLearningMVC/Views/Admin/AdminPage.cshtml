@@ -1,0 +1,142 @@
+﻿@using BusinessLayer.Managers
+@model IEnumerable<DataAccessLayer.Entities.User>
+
+@{
+    ViewBag.Title = Resources.Resources.txtAdminPage;
+    var admin = new AdminManager();
+}
+
+<br>
+@if (ViewBag.Status)
+{
+    <div id="alert-area"></div>
+}
+<div class="contentgrid" style="width:1000px;">
+    @if (!Request.IsAjaxRequest())
+    {
+        using (Ajax.BeginForm("AdminPage", "Admin",
+            new AjaxOptions {UpdateTargetId = "grid-list"}))
+        {
+                <div class="modal-content" style="width: 350px;">
+                    <div class="form-group" >
+                        <div align="left">
+                            <span class="label label-primary">@Resources.Resources.msgFindUsers</span>
+                        </div>
+                        <table align="center">
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" name="userName" placeholder="Name" /></td>
+                                <td>
+                                    <button type="submit" class="btn btn-default">@Resources.Resources.txtSearch</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+        }
+    }
+</div >
+<div id="grid-list" class="contentgrid" style="width:1000px;">
+    <div align="left" ><span class="label label-primary">@Resources.Resources.txtRegisteredUsers</span></div>
+
+    <table class="table table-bordered table-hover " >
+        <thead>
+            <tr>
+                <th>
+                    @Resources.Resources.txtLogin
+                </th>
+                <th>
+                    @Resources.Resources.txtPersonRole
+                </th>
+                <th>
+                    @Resources.Resources.txtFirstName       
+                </th>
+                <th>
+                    @Resources.Resources.txtLastName    
+                </th>
+                <th>
+                    @Resources.Resources.txtSex
+                </th>
+                <th>
+                    @Resources.Resources.txtDateOfBirthday
+                </th>
+                <th>
+                    @Resources.Resources.txtPhoneNumber       
+                </th>
+                <th>
+                    @Resources.Resources.txtEmail    
+                </th>
+                <th>
+                    @Resources.Resources.txtAction
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Login
+                    </td>
+                    <td>
+                        @item.PersonRole
+                    </td>
+                    <td>
+                        @item.Profile.FirstName
+                    </td>
+                    <td>
+                        @item.Profile.LastName
+                    </td>
+                    <td>
+                        @if (item.Profile.Sex != null)
+                        {
+                            if ((bool) item.Profile.Sex)
+                            {
+                                @Resources.Resources.txtMale
+                            }
+                            else
+                            {
+                                if (!(bool) item.Profile.Sex)
+                                {
+                                    @Resources.Resources.txtFemale
+                                }
+
+                            }
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.Profile.DateOfBirth.HasValue)
+                        {
+                            @item.Profile.DateOfBirth.Value.ToShortDateString()
+                        }
+                        
+                    </td>
+                    <td>
+                        @item.Profile.PhoneNumber
+                    </td>
+                    <td>
+                        @item.Profile.Email
+                    </td>
+                    <td>
+                        <button onclick=" window.location.href = '@Url.Action("EditProfilePage", "Admin", new {personID = item.Id})' "
+                             type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtEdit</button>
+                          @if (!admin.HasUserDependence(item.Id, item.PersonRole))
+                        {
+                            <button onclick=" AreYouSure(name) " name="@Url.Action("DeleteUser", "Admin", new {personID = item.Id})"
+                                    type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtDelete</button>
+                        } 
+                        <button onclick=" AreYouSure(name)"  name="@Url.Action("ResetUserPassword", "Admin", new {personID = item.Id})"
+                            type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtResetPassword</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Partial("_Paging")
+    <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button" onclick="javascript: history.go(-1);">@Resources.Resources.txtBack</button>
+</div>
+<script src="~/Content/js/successMessage.js"></script>
+<script>
+    newAlert('success', '@ViewBag.Message');
+</script>
+

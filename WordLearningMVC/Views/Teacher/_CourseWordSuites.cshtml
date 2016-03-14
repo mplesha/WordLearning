@@ -1,0 +1,77 @@
+﻿@using DataAccessLayer.Enums
+@using WordLearningMVC
+@model IList<BusinessLayer.Models.CourseWordSuitesModel>
+
+@{
+    var currentUser = new CurrentUserInfo();
+    var visiblebtn = "";
+}
+
+<div align="left">
+    @if ((currentUser.User.PersonRole == PersonRole.Teacher) && Model.Any(sfn => sfn.StudentFirstName != null))
+    {
+        <span class="label label-primary">@Resources.Resources.txtStudent - @Model[0].StudentFirstName @Model[0].StudentLastName</span>
+    }
+    <span class="label label-primary">@Resources.Resources.txtCourse - "@Model[0].CurrentCourse.Name"</span>
+</div>
+<table class="table table-bordered table-hover own-grid">
+    <thead>
+        <tr>
+            <th>@Resources.Resources.txtName</th>
+            <th>@Resources.Resources.txtCreator</th>
+            <th>@Resources.Resources.txtLanguage</th>
+            @if (Model.Any(ws => ws.StudentFirstName != null))
+            {
+                <th>@Resources.Resources.txtProgress</th>
+            }
+            <th>@Resources.Resources.txtAction</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].WordsuiteName</td>
+                <td>@Model[i].Creator.Profile.FirstName</td>
+                <td>@Model[i].WordsuiteLanguage.Lang</td>
+                @if (Model.Any(ws => ws.StudentFirstName != null))
+                {
+                    <td>@Model[i].Progress%</td>
+                }
+                <td>
+                    @if (Model[i].TranslationsCount == 0)
+                    { visiblebtn = "disabled"; }
+                    else { visiblebtn = ""; }
+                    <button onclick=" window.location.href = '@Url.Action("ViewTranslations", "Teacher",
+                        new { wordSuiteId = Model[i].WordsuiteId, studentId = Model[i].StudentId })' " @visiblebtn  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+                        View items</button>
+                    @if (@Model[i].CurrentCourse.Creater.Id == currentUser.User.Id)
+                    {
+                        <button onclick=" window.location.href = '@Url.Action("RemoveWordsuite", "Teacher",
+                            new { wordsuiteId = Model[i].WordsuiteId, courseId = Model[i].CurrentCourse.Id, courseWordsuitesCount = Model[i].CurrentCourse.WordSuites.Count })' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="Remove Wordsuite" type="submit">
+                            @Resources.Resources.txtRemove</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Any(WS => WS.StudentFirstName == null))
+{
+    @Html.Partial("_Paging", Model, new ViewDataDictionary {{ "courseId", Model[0].CurrentCourse.Id } })
+    <button onclick=" window.location.href = '@Url.Action("AllCourses", "Teacher", new{ page = Session["AllcoursesPage"]})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtBack</button>
+    if (Model.Any(cs => cs.CurrentCourse.Creater.Id == currentUser.User.Id))
+    {
+        <button onclick=" window.location.href = '@Url.Action("AddWordsuites", "Teacher", new {courseId = Model.First().CurrentCourse.Id})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+            @Resources.Resources.txtAddWordSuite</button>
+    }
+}
+else
+{
+    @Html.Partial("_Paging", Model, new ViewDataDictionary { { "courseId", Model[0].CurrentCourse.Id }, { "studentId", Model[0].StudentId } })
+    <button onclick=" window.location.href = '@Url.Action("StudentCourses", "Teacher", new { studentId = Model[0].StudentId,  page = Session["StudentCoursesPage"]})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtBack</button>
+}
+

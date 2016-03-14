@@ -1,0 +1,55 @@
+﻿@*<!DOCTYPE html>*@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - WordLearn</title>
+
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/css/half-slider.css" rel="stylesheet">
+    <link href="../../Content/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../Content/css/paging.css" rel="stylesheet">
+    <link href="../../Content/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="../../Content/Site.css" rel="stylesheet">
+
+    <link href="../../Content/css/bootstrap-tokenfield.css" rel="stylesheet" />
+    <link href="../../Content/css/tokenfield-typeahead.css" rel="stylesheet" />
+    
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+ 
+    <script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/plain" src="~/Content/js/jquery-1.10.2.min.map"></script>
+    <script type="text/javascript" src="../../Content/js/bootstrap.js"></script>
+    <script src="~/Content/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="../../Content/js/modal.js"></script>
+    <script type="text/javascript" src="../../Content/js/modal-dialog.js"></script>
+    <script type="text/javascript" src="../../Content/js/bootstrap-confirmation.js"></script>
+    <script src="~/Content/js/SiteStyling.js"></script>
+    <script src="~/Content/js/textBoxTips.js"></script>
+    <script type="text/javascript" src="../../Content/js/bootstrap-tokeninput.js"></script>
+    <script type="text/javascript" src="../../Content/js/bootstrap-tokenfield.js"></script>
+    <script type="text/javascript" src="../../Content/js/typeahead.js"></script>
+    <script src="~/Content/js/successMessage.js"></script>
+
+
+    <meta name="viewport" content="width=device-width" />
+</head>
+
+<body style="background-image: url('../../Images/Background.png');">
+
+    <ol class="breadcrumb">
+        @Html.Partial("_Header")
+    </ol>
+    <div class="Content">
+        @RenderBody()
+        @RenderSection("Scripts", false)
+    </div>
+    <div class="footer">
+        <text style="font-size: 12px;">&copy; @DateTime.Now.Year @Resources.Resources.txtCopyrights</text>
+    </div>
+
+</body>
+</html>
+
+

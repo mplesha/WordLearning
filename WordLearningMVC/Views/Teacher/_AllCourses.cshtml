@@ -1,0 +1,60 @@
+﻿@using System.Web.UI.WebControls
+@using WordLearningMVC
+@model IList<DataAccessLayer.Entities.Course>
+
+@{
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+    var visiblebtn = "";
+}
+<div align="left"><span class="label label-primary">@Resources.Resources.txtAllCourses</span></div>
+<table class="table table-bordered table-hover own-grid">
+    <thead>
+        <tr>
+            <th>@Resources.Resources.txtName</th>
+            <th>@Resources.Resources.txtLanguage</th>
+            <th>@Resources.Resources.txtCreator</th>
+            <th>@Resources.Resources.txtAction</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].Name</td>
+                @if (Model[i].Language == null)
+                {
+                    <td>@Resources.Resources.txtMultilingual</td>
+                }
+                else
+                {
+                    <td>@Model[i].Language.Lang</td>
+                }
+                <td>@Model[i].Creater.Profile.FirstName</td>
+                <td>
+                    @if (Model[i].WordSuites.Count == 0)
+                        { visiblebtn = "disabled"; }
+                    else { visiblebtn = ""; }
+                    <button onclick=" window.location.href = '@Url.Action("CourseWordsuites", "Teacher",
+                        new { courseId = Model[i].Id })' " @visiblebtn  class="btn btn-default btn-sm dropdown-toggle own-button" name="View wordsuites" type="submit">
+                        @Resources.Resources.txtViewWordSuites</button>
+
+                    @if (Model[i].Creater.Id == currentUser.User.Id)
+                    {
+                        <button onclick=" window.location.href = '@Url.Action("AddWordsuites", "Teacher",
+                            new { courseId = Model[i].Id })' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="Add WordSuites" type="submit">
+                            @Resources.Resources.txtAddWordSuite</button>
+                        if (Model[i].WordSuites.Count == 0 && Model[i].Progresses.Count == 0)
+                        {
+                        <button onclick=" window.location.href = '@Url.Action("RemoveCourse", "Teacher",
+                            new { courseId = Model[i].Id })' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="Remove" type="submit">
+                            @Resources.Resources.txtRemove</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_Paging")
+

@@ -1,0 +1,91 @@
+﻿@using DataAccessLayer.Entities
+@using MvcPaging
+@model WordLearningMVC.Models.DictionaryModel
+
+@if (string.IsNullOrWhiteSpace(Model.LangLangWord))
+{
+}
+else
+{
+    <div><span class="label label-primary">@Model.LangLangWord</span></div>
+}
+
+<div>
+    @using (Ajax.BeginForm("DeleteItem", "Dictionary", new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", OnSuccess = "onDeleteItem" }))
+    {
+        <table class="table table-bordered table-hover own-grid">
+            <thead>
+                <tr >
+                    <th style="text-align: center;">
+                        <input  id="checkAll" type="checkbox" onclick="checkAllFunc(this)" />
+                    </th>
+                    <th>@Resources.Resources.txtWord
+                    </th>
+                    <th>@Resources.Resources.txtTranslation
+                    </th>
+                    <th>@Resources.Resources.txtPartOfSpeech
+                    </th>
+                    <th>@Resources.Resources.txtTranscription
+                    </th>
+                    <th>@Resources.Resources.txtTags
+                    </th>
+                    <th>@Resources.Resources.txtAction
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+        int id = 0;
+
+        foreach (var item in Model.Translations)
+        {
+            string idCheck = "check" + id.ToString();
+                    <tr>
+                        <td align="center">
+                            <input  id="@idCheck" type="checkbox" value="@item.TranslationId" /></td>
+                        <td>@item.OriginalItem.Word</td>
+                        <td>@item.TranslationItem.Word</td>
+                        <td>@(item.PartOfSpeach.ToString() ?? "")</td>
+                        <td>@(item.OriginalItem.Transcription ?? "")</td>
+                        <td>
+                            <ul>
+                                @foreach (var tag in item.WordType)
+                                {
+                                    <li>@tag.Name</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>
+                            @if (item.CreatorId != -1)
+                            {
+                                <button class="btn btn-default btn-sm dropdown-toggle own-button" type="submit" value="@item.TranslationId" name="id">&nbsp;@Resources.Resources.txtDelete</button>
+                            }
+                        </td>
+                    </tr>
+                            id++;
+        }
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@if (((IPagedList<Translation>)Model.Translations).TotalItemCount > Model.DefaultPageSize)
+{
+    <div>
+        @Html.Partial("_MyPaging", Model.Translations)
+    </div>
+}
+
+@*fake tags*@
+<input id="MessageForDelete123" name="MessageForDelete" type="hidden" value="@Model.MessageForDelete" />
+<input id="TranslationsCount" name="TranslationsCount" type="hidden" value="@Model.Translations.Count" />
+<input id="msgWordsuiteIsRequired" name="msgWordsuiteIsRequired" type="hidden" value="@Resources.Resources.msgWordsuiteIsRequired" />
+<input id="msgItemsAdded" name="msgItemsAdded" type="hidden" value="@Resources.Resources.msgItemsAdded" />
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+﻿@model WordLearningMVC.Models.DictionaryModel
+
+<div class="modal fade" id="modalAddedWordsuite" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">@Resources.Resources.txtAddItemsWordsuite</h2>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label class="text-muted">@Resources.Resources.txtWordsuitelanguage</label>
+                    <select class="form-control" id="origWordsuiteLanguage">
+                        @foreach (var lang in Model.OrigLanguages)
+                        {
+                            if (Session["OriginalLanguage"].ToString() == lang.ToString())
+                            {
+                                <option selected>@lang</option>
+                            }
+                            else
+                            {
+                                <option>@lang</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div>
+                    <br/>
+                    <label class="text-muted">@Resources.Resources.txtWordsuiteName</label>
+                    <input type="text" class="form-control" id="tokenfieldWordsuites" value="" style="width: 90%"/>
+                    @*<input id="AddWordsuiteInput" class="form-control" style="width: 90%" placeholder="@Resources.Resources.txtWordsuiteName"  name="AddWordsuite" type="text" value="" autocomplete="off">*@
+                    <br/>
+                    <button class="btn btn-primary" type="submit" onclick="readChecked()" name="secondname">@Resources.Resources.txtAddToWordsuite</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">@Resources.Resources.txtClose</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

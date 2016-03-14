@@ -1,0 +1,82 @@
+﻿@using System.Activities.Expressions
+@using WordLearningMVC
+@using DataAccessLayer.Enums
+@model IList<BusinessLayer.Models.StudentCoursesModel>
+@{
+    var currentUser = new CurrentUserInfo();
+    var visiblebtn = "";
+}
+<div align="left">
+
+    @if ((currentUser.User.PersonRole == PersonRole.Teacher) && Model.First().StudentFirstName != null)
+    {
+        <span class="label label-primary">@Resources.Resources.txtStudent - @Model.First().StudentFirstName @Model.First().StudentLastName</span>
+        <span class="label label-primary">@Resources.Resources.txtStudentCourses</span>
+    }
+    else
+    {
+        <span class="label label-primary">@Resources.Resources.txtMyCourses</span>          
+    }
+</div>
+<table class="table table-bordered table-hover own-grid">
+    <thead>
+        <tr>
+            <th>@Resources.Resources.txtName</th>
+            <th>@Resources.Resources.txtLanguage</th>
+            <th>@Resources.Resources.txtTeacher</th>
+            <th>@Resources.Resources.txtStatus</th>
+            <th>@Resources.Resources.txtAction</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].CourseName</td>
+                @if (Model[i].CourseLanguage == null)
+                {
+                    <td>Multilingual</td>
+                }
+                else
+                {
+                    <td>@Model[i].CourseLanguage.Lang</td>
+                }
+                <td>@Model[i].Creator.Profile.FirstName</td>
+                <td style="vertical-align: middle" align="center">
+                    @if (Model[i].Status > 0.9)
+                    {
+                        <img src="../../Images/Finished.png" width="25" height="25" title="Completed" />
+                    }
+                    else
+                    {
+                        if (Model[i].Status == 0.5)
+                        {<text>In progress</text>}
+                        else
+                        {<text>Not started</text>}
+                    }
+                </td>
+                <td>
+                    @if (Model[i].WordSuitesCount == 0)
+                    {
+                        visiblebtn = "disabled";
+                    }
+                    else
+                    {
+                        visiblebtn = "";
+                    }
+                    <button onclick=" window.location.href = '@Url.Action("CourseWordsuites", "Teacher",
+                        new { courseId = Model[i].CourseId, studentId = Model[i].StudentId })' " @visiblebtn  class="btn btn-default btn-sm dropdown-toggle own-button" name="View WordSuites" type="submit">
+                        @Resources.Resources.txtViewWordSuites</button>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_Paging", Model, new ViewDataDictionary { { "studentId", Model[0].StudentId  } })
+@if (currentUser.User.PersonRole == PersonRole.Teacher)
+{
+    <button onclick=" window.location.href = '@Url.Action("TeacherStudents", "Teacher", new { page = Session["TeacherStudentsPage"] })' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtBack</button>
+}

@@ -1,0 +1,10 @@
+﻿@using WordLearningMVC
+@{
+    ViewBag.Title = @Resources.Resources.txtQuizTimeOut;
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+}
+
+<h1 align="center"><font size="10px">@Resources.Resources.msgTryPassAgain </font><br /><br />
+    <font size="20px" color="red">@ViewBag.QuizTimeOut</font><br/><br/>
+        &nbsp;&nbsp;&nbsp;<button onclick="history.go(-1)"  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit" style="width: 170px;">
+            @Resources.Resources.txtBack</button></h1>

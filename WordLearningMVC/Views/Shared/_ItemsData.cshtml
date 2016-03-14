@@ -1,0 +1,178 @@
+﻿@using BusinessLayer.Models
+@using DataAccessLayer.Enums
+@using WordLearningMVC
+@model WordSuiteModel
+@{
+    ViewBag.Title = "View Items";
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+    var visiblebtn = "";
+    const int Minimum_Items_For_Tutorial = 4;
+ 
+    string[] urlInfo = Model.ReturnUrl.Split(new char[] { '/', '?' }, StringSplitOptions.RemoveEmptyEntries);
+    string controller = urlInfo[0];
+    string action = urlInfo[1];
+
+
+}
+
+@if (!Request.IsAjaxRequest() && Model.AddItems == true)
+{
+    using (Ajax.BeginForm("AddItems", "Student",
+        new AjaxOptions { UpdateTargetId = "grid-list" }))
+    {
+    <div class="contentgrid">
+        <div class="modal-content" style="width: 350px;">
+            <div class="form-group">
+                <div align="left">
+                    <span class="label label-primary">@Resources.Resources.msgFindWords</span>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td>
+
+                            <input type="text" class="form-control" name="word" placeholder="Word" /></td>
+                        <td>
+
+                            <button type="submit" class="btn btn-default">@Resources.Resources.txtSearch</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+        
+    @Html.Hidden("wordSuiteId", Model.WordSuiteId)
+    @Html.Hidden("returnUrl",Model.ReturnUrl)
+   
+
+        if (Model.CreaterId == currentUser.User.Id)
+        {
+            @Html.Hidden("addItems", true)
+            @Html.Hidden("requireProgress", false)
+            
+        }
+    }
+}
+
+<div id="grid-list" class="contgrid">
+        <br/>
+    <div align="Left"><span class="label label-primary">@Resources.Resources.txtWordSuite - @Model.Name</span></div>
+    <table class="table table-bordered table-hover own-grid">
+        <thead>
+            <tr>
+                <th>
+                    @Resources.Resources.txtItem
+                </th>
+                <th>
+                    @Resources.Resources.txtTranslation
+                </th>
+                <th>
+                    @Resources.Resources.txtPartOfSpeech
+                </th>
+                <th>
+                    @Resources.Resources.txtTranscription
+                </th>
+                <th>
+                    @Resources.Resources.txtTags
+                </th>
+                @if (Model.RequireProgress == true)
+                {
+                    <th>
+                        @Resources.Resources.txtProgress
+                    </th>
+                }
+                @if (Model.AddItems)
+                {
+                    <th>
+                        @Resources.Resources.txtAction
+                    </th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            @for (int i=0;i<Model.ItemTranslation.Count;i++)
+            {
+      
+                <tr>
+                    <td>
+                        @Model.ItemTranslation[i].Item
+                    </td>
+                    <td>
+                        @Model.ItemTranslation[i].Translation
+                    </td>
+                    <td>
+                        @Model.ItemTranslation[i].PartOfSpeach
+                    </td>
+                    <td>
+                        @Model.ItemTranslation[i].Transription
+                    </td>
+                    <td>
+
+                        @foreach (var tag in Model.ItemTranslation[i].Tags)
+                        {
+                            <li>@tag.Name</li>
+                        }
+
+                    </td>
+                    @if (Model.RequireProgress == true)
+                    {
+                        <td>
+                            @Model.ItemTranslation[i].Progress %
+                        </td>
+                    }
+
+                    @if (Model.AddItems )
+                    {
+                        <td>
+                            <button onclick=" window.location.href = '@Url.Action("AddItem", "Student", new { WordSuiteId = Model.WordSuiteId,ReturnUrl=Model.ReturnUrl,currentPage=Model.CurrentPage, item = Model.ItemTranslation[i].Item, translation = Model.ItemTranslation[i].Translation })' " class="btn btn-default btn-sm dropdown-toggle own-button" name="AddItem" type="submit">@Resources.Resources.txtAddItem</button>
+                        </td>
+                    }
+
+                </tr>
+            }
+        
+        </tbody>
+    </table>
+    @Html.Partial("_Paging", Model.ItemTranslation, new ViewDataDictionary { { "wordSuiteId", Model.WordSuiteId }, { "addItems", Model.AddItems }, { "requireProgress", Model.RequireProgress },{"returnUrl",Model.ReturnUrl} })
+
+    
+    @if (Model.ReturnUrl.Contains("PrivateCourseWordSuites"))
+    {
+        <button class="btn btn-default btn-sm dropdown-toggle own-button"  onclick=" window.location.href = '@Url.Action(action, controller, new {page = (int) Session[action], defaultLanguage = Model.Language})' ">@Resources.Resources.txtBack</button>
+    }
+    else
+    {
+        if (Model.ReturnUrl.Contains("QuizAnswers"))
+         {
+             <button class="btn btn-default btn-sm dropdown-toggle own-button"  onclick=" history.go(-1) ">@Resources.Resources.txtBack</button>
+         }
+         else
+         {
+             <button class="btn btn-default btn-sm dropdown-toggle own-button" onclick=" window.location.href = '@Url.Action(action, controller, new {page = (int) Session["WordSuitesData"], defaultLanguage = Model.Language})' ">@Resources.Resources.txtBack</button>
+
+         }
+    }
+   
+
+    @if ((currentUser.User.PersonRole==PersonRole.Student || currentUser.User.PersonRole==PersonRole.Listener) && Model.AddItems == false && Model.RequireProgress == true)
+    {
+        if (Model.ItemTranslation.Count < Minimum_Items_For_Tutorial)
+        {
+            if (!Request.IsAjaxRequest())
+            { visiblebtn = "disabled"; }
+        }
+        else
+        {
+            visiblebtn = "";
+        }
+          <button onclick=" window.location.href = '@Url.Action("PrintWordsuite", "Teacher", new { wordsuiteId = Model.WordSuiteId})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+            @Resources.Resources.txtPrintTable</button>
+        <button class="btn btn-default btn-sm dropdown-toggle own-button"  @visiblebtn value="Run Tutorial" onclick=" window.location.href = '@Url.Action("ChooseLevel", "Tutorial", new { wordSuiteId = Model.WordSuiteId })    ' ">Run tutorial</button>
+       
+        if (Model.AllItemsLearned)
+        {
+            <button class="btn btn-default btn-sm dropdown-toggle own-button" onclick=" window.location.href = '@Url.Action("RunQuiz", "Quiz", new { wordSuiteId = Model.WordSuiteId })    ' ">Run quiz</button>
+        }
+    }
+</div>

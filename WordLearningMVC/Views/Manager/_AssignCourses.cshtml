@@ -1,0 +1,52 @@
+﻿@model IList<DataAccessLayer.Entities.Course>
+
+@{
+    ViewBag.Title = Resources.Resources.txtAssignCourses;
+    var studentId = ViewBag.studentId;
+    var student = ViewBag.Student;
+}
+
+<div align="left">
+    <span class="label label-primary">@Resources.Resources.txtAllCourses</span>
+    <span class="label label-primary">@student</span>
+</div>
+
+<table class="table table-bordered table-hover own-grid">
+    <thead>
+        <tr>
+            <th>
+                @Resources.Resources.txtName
+            </th>
+            <th>
+                @Resources.Resources.txtLanguage
+            </th>
+            <th>
+                @Resources.Resources.txtAssignCourse
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        { 
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @if (item.Language == null)
+                    {@Resources.Resources.txtMultilingual }
+                    else
+                    {
+                        @item.Language.Lang
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-default btn-sm dropdown-toggle own-button" onclick=" AreYouSure(name)"
+                               name="@Url.Action("AssignCourse", "Manager", new { courseId = item.Id, studentId = studentId })">@Resources.Resources.txtAssignCourse</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_Paging", Model, new ViewDataDictionary { { "studentId", studentId } })
+<button class="btn btn-default btn-sm dropdown-toggle own-button" onclick=" window.location.href = '@Url.Action("StudentList", "Manager", new { page=Session["StudentListPage"] })' " name="Back">@Resources.Resources.txtBack</button>

@@ -1,0 +1,121 @@
+﻿@using WordLearningMVC.Models
+@model DictionaryModel
+@{
+    ViewBag.Title = Resources.Resources.txtAllDictionary;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script src="~/Content/js/dictionary.js"></script>*@
+<div><H1><span class="label label-primary">@Resources.Resources.txtAllDictionary</span></H1></div>
+<br/>
+<div class="row" style="width: 100%; margin-left: -15px;" >
+    <div class="col-md-9">
+        <div class="panel panel-default" style="min-width: 230px;">
+                <div class="panel-heading">
+                    <h5 class="panel-title">@Resources.Resources.txtSearchWords</h5>
+                </div>
+                <div class="panel-body" style="margin-top: 0px; margin-bottom: 0px;padding-top: 4px; min-width: 230px;">
+                    
+                    @using (Ajax.BeginForm("SearchWords", "Dictionary", new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get" }, new { @class = "navbar-form navbar-left", @style = "margin-top: 0px; margin-bottom: 0px;" }))
+                    {
+                        <div class="form-group">
+                            <select class="form-control" name="SearchModel.OrigLanguage">
+                                @foreach (var lang in Model.OrigLanguages)
+                                {
+                                    if (Session["OriginalLanguage"].ToString() == lang)
+                                    {
+                                        <option selected>@lang</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@lang</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name ="SearchModel.TransLanguage">
+                                @foreach (var lang in Model.TransLanguages)
+                                {
+                                    if (Session["TranslationLanguage"].ToString() == lang)
+                                    {
+                                        <option selected>@lang</option>
+                                    }
+                                    else
+                                    {
+                                        <option>@lang</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="appendedInputButton" type="text" name="SearchModel.Word" placeholder="@Resources.Resources.txtSearchWord" />
+                            <button type="submit" class="btn btn-primary">@Resources.Resources.txtSearch</button>
+                        </div>                        
+                        <div>
+                            
+                            <label class="span2" style="font-size: 0.9em;width: 150px;">
+                                @Html.CheckBox("SearchModel.TeachersWords", (bool)Session["TeachersWords"])@Resources.Resources.txtSearchOnlyOwnWords
+                            </label>
+
+                            <label class="span2" style="font-size: 0.9em;width: 150px;">
+                                @Html.CheckBox("SearchModel.SearchTags", (bool)Session["SearchTags"])@Resources.Resources.txtSearchByTags
+                            </label>
+                            
+                            <label class="span2" style="font-size: 0.9em;width: 150px;">
+                                @Html.CheckBox("SearchModel.SearchWord", (bool)Session["SearchWords"])@Resources.Resources.txtSearchByWords
+                            </label>
+                            
+                            <label class="span2" style="font-size: 0.9em;width: 150px;">
+                                @Html.CheckBox("SearchModel.Verbatim", (bool)Session["Verbatim"])@Resources.Resources.txtVerbatim
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+    </div>
+    <div class="col-md-3" style="max-width: 230px" >
+        <div class="panel panel-default" style="min-width: 180px; max-width: 230px">
+            <div class="panel-heading">
+                <h5 class="panel-title">@Resources.Resources.txtAddNewTransl</h5>
+            </div>
+            <div class="panel-body" style="margin-top: 0px; margin-bottom: 0px;padding-top: 9px;padding-bottom: 0px;">
+                <div>
+                    @Html.Partial("_AddItemFields", Model) 
+                    @Html.Partial("_AddFromFile", Model) 
+                    @Html.Partial("_ModalTable", Model)
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" style="min-width: 180px; max-width: 230px">
+            <div class="panel-heading">
+                <h5 class="panel-title">@Resources.Resources.txtAddItemsWordsuite</h5>
+            </div>
+            <div class="panel-body" style="margin-top: 0px; margin-bottom: 10px;padding-top: 9px;padding-bottom: 0px;">
+                <div>
+                    @Html.Partial("_AddWordsuiteModal", Model) 
+                    <a id="addWordsuiteButton" style="width: 100%"  onclick="ifChecked()" class="btn btn-info btn-sm">@Resources.Resources.txtAddCheckedItems</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id = "grid-list">
+    @Html.Partial("_AllTranslations", Model) 
+</div>
+
+
+<input id="msgChooseItems" name="msgChooseItems" type="hidden" value="@Resources.Resources.msgChooseItems" />
+<input id="ModelCanShow" name="ModelCanShow" type="hidden" value="@Model.CanShow.ToString()" />
+<input id="MessageForAdd" name="MessageForAdd" type="hidden" value="@Model.MessageForAdd" />
+@if (Model.AddedTranslations != null)
+{
+    <input id="AddedTranslationsCount" name="AddedTranslationsCount" type="hidden" value="@Model.AddedTranslations.Count()" />
+}
+else
+{
+    <input id="AddedTranslationsCount" name="AddedTranslationsCount" type="hidden" value="-1" />
+}
+<input id="msgTranslationsExist" name="msgTranslationsExist" type="hidden" value="@Resources.Resources.msgTranslationsExist" />
+
+<script src="~/Content/js/dictionary.js"></script>

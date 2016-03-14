@@ -1,0 +1,49 @@
+﻿@model WordLearningMVC.Models.LoginModel
+
+@{
+    ViewBag.Title = Resources.Resources.txtSignIn;
+}
+
+<h2>@Resources.Resources.txtSignIn</h2>
+<br />
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Resources.Resources.txtLogin</legend>
+
+        <div class="editor-label">
+            @Html.Label(Resources.Resources.txtLogin)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName, new { style = "width:200px",@class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+             @Html.Label(Resources.Resources.txtPassword)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password, new { width = "120px",@class = "form-control has-error" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+             @Html.Label(Resources.Resources.txtRememberMe)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RememberMe)
+            @Html.ValidationMessageFor(model => model.RememberMe)
+        </div>
+
+        <p>
+            <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">
+                @Resources.Resources.txtLogin
+            </button>
+        </p>
+    </fieldset>
+}

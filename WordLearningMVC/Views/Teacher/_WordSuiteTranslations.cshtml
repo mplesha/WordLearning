@@ -1,0 +1,107 @@
+﻿@using DataAccessLayer.Enums
+@using WordLearningMVC
+@Scripts.Render("~/Content/js/printpage.js")
+@model IList<BusinessLayer.Models.WordSuiteTranslationsModel>
+
+@{
+    var visiblebtn = "";
+    var currentUser = new CurrentUserInfo();
+}
+<div id="1">
+    <div align="Left">
+        @if ((currentUser.User.PersonRole == PersonRole.Teacher) && Model.Any(sfn => sfn.StudentFirstName != null))
+        { <span class="label label-primary">@Resources.Resources.txtStudent - @Model[0].StudentFirstName @Model[0].StudentLastName</span>}
+        <span class="label label-primary">@Resources.Resources.txtWordSuite - "@Model[0].CurrentWordSuite.Name"  </span>
+    </div>
+    <table class="table table-bordered table-hover own-grid" border="1">
+        <thead>
+            <tr>
+                <th>@Resources.Resources.txtItem</th>
+                <th>@Resources.Resources.txtTranslation</th>
+                <th>@Resources.Resources.txtPartOfSpeech</th>
+                <th>@Resources.Resources.txtTranscription</th>
+                <th>@Resources.Resources.txtTags</th>
+                @if (Model.Any(ws => ws.StudentFirstName != null))
+                {
+                    <th>@Resources.Resources.txtLearnedDate</th>
+                    <th>@Resources.Resources.txtProgress</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                
+                <tr>
+                    <td>@Model[i].OriginalItem</td>
+                    <td>@Model[i].TranslatedItem</td>
+                    @if (@Model[i].PartOfSpeech != null)
+                    {<td>@Model[i].PartOfSpeech</td>}
+                    else
+                    {<td></td>}
+                    <td>@Model[i].Transcription</td>
+                    <td>@foreach (var tag in Model[i].TranslationTags)
+                        {
+                        <li>@tag.Name</li>
+                        }
+                    </td>
+                    @if (@Model.Any(ws => ws.StudentFirstName != null))
+                    {
+                        if (Model[i].TranslationProgress != null)
+                        {
+                        <td>@Model[i].TranslationProgress.LearnedDate.ToShortDateString()
+                            @Model[i].TranslationProgress.LearnedDate.ToShortTimeString()
+                        </td>
+                        <td>@(Model[i].TranslationProgress.Progress * 100)%</td>
+                        }
+                        else
+                        {
+                        <td></td>
+                        <td></td>                           
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@if (Model.Any(sfn => sfn.StudentFirstName == null))
+{@Html.Partial("_Paging", Model, new ViewDataDictionary { { "wordsuiteId", Model[0].CurrentWordSuite.WordSuiteId } })}
+else
+{@Html.Partial("_Paging", Model, new ViewDataDictionary { { "wordsuiteId", Model[0].CurrentWordSuite.WordSuiteId }, { "studentId", Model[0].StudentId } })}
+@if (Model.Any(trs => trs.StudentId != 0))
+{
+    <button onclick=" window.location.href = '@Url.Action("CourseWordsuites", "Teacher", new { courseId = Model[0].CurrentWordSuite.CourseId, studentId = Model[0].StudentId, page = Session["CourseWordsuitesPage"] })' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtBack</button>
+}
+else
+{
+    <button onclick=" window.location.href = '@Url.Action("CourseWordsuites", "Teacher", new { courseId = Model[0].CurrentWordSuite.CourseId, page = Session["CourseWordsuitesPage"]})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtBack</button>
+}
+
+@if ((currentUser.User.PersonRole == PersonRole.Student || currentUser.User.PersonRole == PersonRole.Listener))
+{
+     <button onclick=" window.location.href = '@Url.Action("PrintWordsuite", "Teacher", new { wordsuiteId = Model.First().CurrentWordSuite.WordSuiteId})' "  class="btn btn-default btn-sm dropdown-toggle own-button" name="View items" type="submit">
+        @Resources.Resources.txtPrintTable</button>   
+}
+
+@if ((currentUser.User.PersonRole == PersonRole.Student || currentUser.User.PersonRole == PersonRole.Listener))
+{
+    if (Model.Count < 4)
+    {
+        if (!Request.IsAjaxRequest())
+        { visiblebtn = "disabled"; }
+    }
+    else { visiblebtn = ""; }
+    
+    <button class="btn btn-default btn-sm dropdown-toggle own-button" @visiblebtn value="Run Tutorial" onclick="window.location.href = '@Url.Action("ChooseLevel", "Tutorial", new { wordSuiteId = Model[0].CurrentWordSuite.WordSuiteId })  ' ">@Resources.Resources.txtRunTutorial</button>
+
+    if (Model.Any(trs => trs.TranslationProgress != null))
+    {
+        if (Model.Any(trs => trs.TranslationProgress.Progress <= 0.9))
+        {<button class="btn btn-default btn-sm dropdown-toggle own-button" value="Run Quiz" onclick=" window.location.href = '@Url.Action("RunQuiz", "Quiz", new { wordSuiteId = Model[0].CurrentWordSuite.WordSuiteId })    ' ">@Resources.Resources.txtRunQuiz</button>}
+    }
+    else
+    {<button class="btn btn-default btn-sm dropdown-toggle own-button" value="Run Quiz" onclick=" window.location.href = '@Url.Action("RunQuiz", "Quiz", new { wordSuiteId = Model[0].CurrentWordSuite.WordSuiteId })    ' ">@Resources.Resources.txtRunQuiz</button>}
+}

@@ -1,0 +1,110 @@
+﻿@using DataAccessLayer.Entities
+@using DataAccessLayer.Enums
+@using WordLearningMVC
+@*@model IList<WordSuite>*@
+@model IList<BusinessLayer.Models.WordSuiteModel>
+
+@{
+    CurrentUserInfo currentUser = new CurrentUserInfo();
+    
+
+}
+
+<div id="grid-list" class="contgrid">
+    <br/>
+    @if (Request.RawUrl.Contains("Student/PrivateCourseWordSuite"))
+    {
+        <div align="left"><span class="label label-primary">@Resources.Resources.txtPrivateCourseWordSuites</span></div>
+    }
+    else
+    {
+        <div align="left"><span class="label label-primary">@Resources.Resources.txtAllWordSuites</span></div>
+    }
+    <table class="table table-bordered table-hover own-grid">
+        <thead>
+            <tr>
+                <th>@Resources.Resources.txtName</th>
+                <th>@Resources.Resources.txtLanguage</th>
+                <th>@Resources.Resources.txtCreator</th>
+                @if (Request.RawUrl.Contains("Student/PrivateCourseWordSuite"))
+                {
+                    <th>@Resources.Resources.txtProgress</th>
+                }
+                <th>@Resources.Resources.txtAction</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>@Model[i].Name</td>
+                    <td>@Model[i].Language</td>
+                    <td>@Model[i].Creator</td>
+                    @if (Request.RawUrl.Contains("Student/PrivateCourseWordSuite"))
+                    {
+                        <td>@Model[i].Progress %</td>
+                    }
+
+                  
+                    <td>
+                        @if (Request.RawUrl.Contains("Student/PrivateCourseWordSuites"))
+                        {
+                            <button onclick=" window.location.href = '@Url.Action("ViewItems", "Student", new { wordsuiteId = Model[i].WordSuiteId, addItems = false, requireProgress = true,returnUrl=Model.First().ReturnUrl })' " class="btn btn-default btn-sm dropdown-toggle own-button" name="ViewItems" type="submit">@Resources.Resources.txtViewItems</button>
+                        }
+                        else
+                        {
+                            <button onclick=" window.location.href = '@Url.Action("ViewItems", "Student", new { wordsuiteId = Model[i].WordSuiteId, addItems = false, requireProgress = false,returnUrl=Model.First().ReturnUrl })' " class="btn btn-default btn-sm dropdown-toggle own-button" name="ViewItems" type="submit">@Resources.Resources.txtViewItems</button>
+                        }
+                        @if (Request.RawUrl.Contains("Student/WordSuites"))
+                        {
+                            <button onclick=" window.location.href = '@Url.Action("AddWordSuite", "Student", new { wordSuiteId = Model[i].WordSuiteId })' " class="btn btn-default btn-sm dropdown-toggle own-button" name="AddToCourse" type="submit">@Resources.Resources.txtAddToCourse</button>
+                        }
+                        @if (currentUser.User.Id == Model[i].CreaterId)
+                        {
+                            <button onclick=" window.location.href = '@Url.Action("AddItems", "Student", new { wordSuiteId = Model[i].WordSuiteId,returnUrl=Model.First().ReturnUrl })' " class="btn btn-default btn-sm dropdown-toggle own-button" name="AddItems" type="submit">@Resources.Resources.txtAddItems</button>
+                        
+                            if (Request.RawUrl.Contains("Student/PrivateCourseWordSuites") ||Request.RawUrl.Contains("Student/CreateWordSuite"))
+                            {
+                                <button class="btn btn-default btn-sm dropdown-toggle own-button"  id="@Model[i].WordSuiteId" onclick="ReplyClick(this.id)"  name="rename"    data-toggle="modal" data-target="#RenameWordSuiteModal">@Resources.Resources.txtRename</button>
+                            }                
+                        }
+                        @if (Request.RawUrl.Contains("Student/PrivateCourseWordSuites") || currentUser.User.Id == Model[i].CreaterId)
+                        {
+                            <button onclick=" window.location.href = '@Url.Action("RemoveWordsuite", "Student",
+                                                                          new {wordsuiteId = Model[i].WordSuiteId})' " class="btn btn-default btn-sm dropdown-toggle own-button" name="Remove Wordsuite" type="submit">
+                                @Resources.Resources.txtRemove</button>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Partial("_RenameWordSuiteModal") 
+    @if (Model.Count > 0)
+    {
+        @Html.Partial("_Paging", Model, new ViewDataDictionary { { "selectedLanguage", Model.First().Language},{"returnUrl",Model.First().ReturnUrl}  })
+    }
+
+    @{
+        if (currentUser.User.PersonRole == PersonRole.Student || currentUser.User.PersonRole == PersonRole.Listener
+            && Request.RawUrl.Contains("Student/PrivateCourseWordSuites"))
+        {
+            using (Html.BeginForm("WordSuites", "Student"))
+            {
+                 <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtAddWordSuite</button>
+            }
+        }
+    }
+</div>
+
+<script type="text/javascript">
+    function ReplyClick(clickedId) {
+
+        document.getElementById('wordsuiteid').value = clickedId;
+    }
+</script>
+
+
+

@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Tutorial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="restTime" value="@ViewBag.Time" style="width: 50px" />
+<div align="right">
+    <button class="btn" onclick=" window.location.href = '@Url.Action("FinishTutorial", "Tutorial")' " name="Stop">@Resources.Resources.txtStop</button>
+    <br />
+    <br />
+</div>
+@using (Html.BeginForm("Index", "Tutorial"))
+{
+    <div id="progressTimer"></div>
+    <br />
+    <br />
+    <script>
+        var model = @(Html.Raw(Json.Encode(Model)));
+        var answers = [model];
+    </script>
+    <div id="options">
+        <input type="button" id="titleWord" value="@Model[0].TitleWord" class="btn btn-default" onclick="nextWord(answers)"/>
+        <br />
+        <br />
+        <br />
+        <div class="btn-group">
+            <input type="button" id="option1" value="@Model[0].PossibleAnswers[0].Replace(" ", " &#10 ")"onclick=" checkAnswer(this, answers) " class="btn btn-default" name="@Model[0].Colors[0].ToString().ToLower()"/>
+            <input type="button" id="option2" value="@Model[0].PossibleAnswers[1].Replace(" ", " &#10 ")" onclick=" checkAnswer(this, answers) " class="btn btn-default" name="@Model[0].Colors[1].ToString().ToLower()"/>
+        </div>
+        <br />
+        <br />
+        <div class="btn-group">
+            <input type="button" id="option3" value="@Model[0].PossibleAnswers[2].Replace(" ", " &#10 ")" onclick=" checkAnswer(this, answers) " class="btn btn-default" name="@Model[0].Colors[2].ToString().ToLower()"/>
+            <input type="button" id="option4" value="@Model[0].PossibleAnswers[3].Replace(" ", " &#10 ")" onclick=" checkAnswer(this, answers) " class="btn btn-default" name="@Model[0].Colors[3].ToString().ToLower()"/>
+        </div>
+    </div>
+}
+
+<style type="text/css">
+    input[type="button"] {
+        white-space: normal;
+    }
+</style>
+
+<link href="../../Content/css/bootstrap.min.css" rel="stylesheet">
+<script src="~/Content/js/jquery.progressTimer.js"></script>
+<script src="~/Content/js/tutorial.js"></script>

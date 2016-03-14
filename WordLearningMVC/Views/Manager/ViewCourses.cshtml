@@ -1,0 +1,18 @@
+﻿@model IList<DataAccessLayer.Entities.Progress>
+
+@{
+    ViewBag.Title = Resources.Resources.txtViewCourses;
+}
+@if (ViewBag.Status)
+{
+    <div align="center" id="alert-area"></div>
+}
+
+<div id="grid-list" class="contentgrid">
+    @Html.Partial("_ViewCourses")
+</div>
+
+<script src="~/Content/js/successMessage.js"></script>
+<script>
+    newAlert('success', '@ViewBag.Message');
+</script>

@@ -1,0 +1,63 @@
+﻿@using MvcPaging
+
+@{
+    string[] urlInfo = Request.RawUrl.Split(new char[] {'/','?'}, StringSplitOptions.RemoveEmptyEntries);
+    string controller = urlInfo[0];
+    //string action=urlInfo[1];
+    string action;
+    if (urlInfo.Count() == 1)
+    {
+        action = "Index";
+    }
+    else
+    {
+        action = urlInfo[1];
+    }
+
+    RouteValueDictionary routeDictionary=new RouteValueDictionary();
+    routeDictionary.Add("controller",controller);
+    routeDictionary.Add("action", action);
+    
+    foreach (var v in ViewData)
+     {
+         routeDictionary.Add(v.Key, v.Value);
+     }
+ 
+    
+}
+@if (Model.TotalItemCount > Model.PageSize)
+{
+    <div class="pager pagination-centered blue-round-theme">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() {Next = "Next", Previous = "Previous", Page = "P"},
+                ItemIcon = new ItemIcon() {Previous = "glyphicon glyphicon-arrow-left", Next = "glyphicon glyphicon-arrow-right"},
+                TooltipTitles = new TooltipTitles() {Next = "Next page", Previous = "Previous page", Page = "Page {0}"},
+                Size = Size.small,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+ 
+                 
+
+
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnFailure = "failurePaging"
+            },
+            routeDictionary))
+    </div>
+}
+
+ <script type="text/javascript">
+
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
+  </script>

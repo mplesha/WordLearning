@@ -1,0 +1,13 @@
+﻿@model IList<DataAccessLayer.Entities.WordSuite>
+
+@{
+    ViewBag.Title = Resources.Resources.txtAllWordSuites;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" }))
+{
+    <div class="contentgrid" id="grid-list">
+        @Html.Partial("_AllWordSuites")
+    </div>
+}

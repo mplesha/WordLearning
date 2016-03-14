@@ -1,0 +1,34 @@
+﻿@model DataAccessLayer.Entities.Settings
+@{
+    ViewBag.Title = "Settings";
+}
+<br/>
+@if (ViewBag.Status)
+{
+    <div id="alert-area"></div>
+}
+@using (Html.BeginForm("ChangeSettings", "Admin"))
+{
+    <div  class="contentgrid">
+        <div align="left"><span class="label label-primary">@Resources.Resources.txtSettings</span></div>
+        <table class="table table-bordered table-hover own-grid">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Resources.Resources.msgEnforcedNumberOfAttempts</td>
+                    <td>@Html.TextBoxFor(model => model.ENFORCED_NUMBER_OF_ATTEMPTS, new { Value = Model.ENFORCED_NUMBER_OF_ATTEMPTS })</td>
+                </tr>
+                <tr>
+                    <td>@Resources.Resources.msgEnforcedDelayBetweenAttempts</td>
+                    <td>@Html.TextBoxFor(model => model.ENFORCED_DELAY_BETWEEN_ATTEMPTS, new { Value = Model.ENFORCED_DELAY_BETWEEN_ATTEMPTS })</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtChange</button>
+    </div>
+}
+<script src="~/Content/js/successMessage.js"></script>
+<script>
+    newAlert('success', '@ViewBag.Message');
+</script>

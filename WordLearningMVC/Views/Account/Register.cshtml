@@ -1,0 +1,82 @@
+﻿@model WordLearningMVC.Models.RegisterModel
+
+
+@{
+    ViewBag.Title = Resources.Resources.txtRegisterPage;
+    Layout = "../../Views/Shared/_Layout.cshtml";
+}
+
+<br />
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Resources.Resources.txtEnterData</legend>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.UserName, new {@class = "form-control has-error"})
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.Password, new {@class = "form-control has-error", @type = "password"})
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConfirmPassword, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.ConfirmPassword, new {@class = "form-control has-error", @type = "password"})
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control has-error"})
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.LastName, new {@class = "form-control has-error"})
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.DateOfBirth, new {@class = "form-control has-error", @type = "date"})
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="Sex">@Resources.Resources.txtSex</label>
+            <select class=" form-control" data-width="17%" name="Sex">@*selectpicker*@
+                <option>@Resources.Resources.txtChooseGender</option>
+                <option id="true" value="true">@Resources.Resources.txtMale</option>
+                <option id="false" value="false">@Resources.Resources.txtFemale</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.Email, new {@class = "form-control has-error"})
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.PhoneNumber, new {@class = "form-control has-error"})
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <p>
+            <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">
+                @Resources.Resources.txtRegister
+            </button>
+        </p>
+    </fieldset>
+}
+<script src="~/Content/js/SiteStyling.js"></script>
+

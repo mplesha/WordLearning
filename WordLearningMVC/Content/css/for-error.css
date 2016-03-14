@@ -1,0 +1,9 @@
+
+.fillimage 
+{
+    background-repeat: no-repeat;
+	width:75%;
+	height:75%;
+	background-position: center;
+	background-size: cover;
+}

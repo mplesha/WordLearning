@@ -1,0 +1,61 @@
+﻿@using MvcPaging
+
+@{
+    string[] urlInfo = Request.RawUrl.Split(new char[] {'/','?'}, StringSplitOptions.RemoveEmptyEntries);
+    string controller = urlInfo[0];
+    //string action=urlInfo[1];
+    string action;
+    if (urlInfo.Count() == 1)
+    {
+        action = "Index";
+    }
+    else
+    {
+        action = urlInfo[1];
+    }
+     
+}
+
+<div class="pager pagination-centered blue-round-theme">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() {Next = "Next", Previous = "Previous", Page = "P"},
+                ItemIcon = new ItemIcon() { Previous = "glyphicon glyphicon-arrow-left", Next = "glyphicon glyphicon-arrow-right"},
+                TooltipTitles = new TooltipTitles() {Next = "Next page", Previous = "Previous page", Page = "Page {0}"},
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                
+
+            },
+            new AjaxOptions
+            {
+                
+                UpdateTargetId = "grid-list"//,
+                //OnBegin = "beginPaging",
+                //OnSuccess = "successPaging",
+                //OnFailure = "failurePaging"
+            },
+            new {controller = "Dictionary", action = "ChangePage", wordSuiteId=ViewData["WordSuiteId"]}))
+</div>
+ <script type="text/javascript">
+
+            function beginPaging(args) {
+                // Animate
+                $('#grid-list').fadeOut('normal');
+            }
+
+            function successPaging() {
+                // Animate
+                $('#grid-list').fadeIn('normal');
+                $('a').tooltip();
+            }
+
+            function failurePaging() {
+                alert("Could not retrieve list.");
+            }
+  </script>

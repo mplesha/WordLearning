@@ -1,0 +1,99 @@
+﻿@using System.Globalization
+@using BusinessLayer.Managers
+@using DataAccessLayer.Enums
+
+@model WordLearningMVC.Models.EditModel
+@{
+    ViewBag.Title = Resources.Resources.txtEditProfilePage;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var admin = new AdminManager();
+    var user = admin.GetUser(Model.UserName);
+}
+
+
+    <h6 align="center"><span class="label label-primary">@Resources.Resources.txtEdit</span></h6><br>
+    @using (Html.BeginForm("EditProfilePage", "Admin"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.UserName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.FirstName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.LastName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, new {@class = "control-label"})
+          @*  @Html.TextBoxFor(model => model.DateOfBirth, new {@class = "form-control", @type = "date"})*@
+            @Html.TextBox("DateOfBirth",Model.DateOfBirth.HasValue?Model.DateOfBirth.Value.ToString("dd-mm-yyyy",CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat):"",new {@class = "form-control", @type = "date"})
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
+        <div class="form-group">
+                @Html.Label(@Resources.Resources.txtSex)                                        
+                @Html.DropDownListFor(model => model.Sex,
+                    new[]
+                    {
+                        new SelectListItem {Text = Resources.Resources.txtMale, Value = true.ToString()},
+                        new SelectListItem {Text = Resources.Resources.txtFemale, Value = false.ToString()}
+                    }, Resources.Resources.txtChooseGender, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Sex) 
+                                                    
+            </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.Email, new {@class = "form-control has-error", @type = "mail"})
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new {@class = "control-label"})
+            @Html.TextBoxFor(model => model.PhoneNumber, new {@class = "form-control",@id = "maskTest"})
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        if (!admin.HasUserDependence(user.Id, user.PersonRole))
+        {
+            <div class="form-group">
+                @Html.Label(@Resources.Resources.txtPersonRole)                                        
+                @Html.DropDownListFor(model => model.PersonRole,
+                    new[]
+                    {
+                        new SelectListItem {Text = PersonRole.Admin.ToString(), Value = PersonRole.Admin.ToString()},
+                        new SelectListItem {Text = PersonRole.Listener.ToString(), Value = PersonRole.Listener.ToString()},
+                        new SelectListItem {Text = PersonRole.Manager.ToString(), Value = PersonRole.Manager.ToString()},
+                        new SelectListItem {Text = PersonRole.Student.ToString(), Value = PersonRole.Student.ToString()},
+                        new SelectListItem {Text = PersonRole.Teacher.ToString(), Value = PersonRole.Teacher.ToString()}
+                    }, Resources.Resources.txtChooseRole, new {@class = "form-control has-error"})
+                @Html.ValidationMessageFor(model => model.PersonRole) 
+                                                    
+            </div>
+             
+        }
+        else
+        {
+            @Html.HiddenFor(model=>model.PersonRole)
+        }
+        <p>
+            <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button" ID="Button1" >@Resources.Resources.txtSave</button>
+        </p>
+    }
+@section Scripts
+{
+    <script src="~/Content/js/jquerymaskedinput.js"></script>
+    <script>
+        $(function ($) {
+                $("#maskTest").mask("+38-(999)-999-99-99");
+            }
+        );
+    </script>
+}

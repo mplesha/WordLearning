@@ -1,0 +1,61 @@
+﻿@model IList<DataAccessLayer.Entities.User>
+
+@{
+    ViewBag.Title = Resources.Resources.txtManager;
+}
+
+<div align="left">
+    <span class="label label-primary">@Resources.Resources.txtStudents</span>
+</div>
+<table class="table table-bordered table-hover own-grid">
+    <thead>
+        <tr>
+            <th>
+                @Resources.Resources.txtLogin
+            </th>
+            <th>
+                @Resources.Resources.txtFirstName
+            </th>
+            <th>
+                @Resources.Resources.txtLastName
+            </th>
+            <th>
+                @Resources.Resources.txtViewCourses
+            </th>
+            <th>
+                @Resources.Resources.txtAssignCourses
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        { 
+            <tr>
+                <td>
+                    @item.Login
+                </td>
+                <td>
+                    @item.Profile.FirstName
+                </td>
+                <td>
+                    @item.Profile.LastName
+                </td>
+                <td>
+
+                    @using (Html.BeginForm("ViewCourses", "Manager", new { studentId = item.Id }))
+                    {                            
+                        <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtViewCourses</button>
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("AssignCourses", "Manager", new { studentId = item.Id }))
+                    {
+                        <button type="submit" class="btn btn-default btn-sm dropdown-toggle own-button">@Resources.Resources.txtAssignCourses</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Partial("_Paging", Model)

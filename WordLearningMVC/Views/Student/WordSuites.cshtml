@@ -1,0 +1,63 @@
+﻿@model LanguageModel
+
+@using BusinessLayer.Models
+@using DataAccessLayer.Enums
+@using WordLearningMVC
+
+@{
+    ViewBag.Title = @Resources.Resources.txtWordSuites;
+    
+}
+
+<div class="contentgrid">
+    @using (Ajax.BeginForm("WordSuitesData", "Student", new AjaxOptions { UpdateTargetId = "grid-list", InsertionMode=InsertionMode.Replace },new {@id="forShowing"}))
+    {
+               <form class="navbar-form navbar-left">
+            <div class="modal-content own-grid">
+                <div class="form-group">
+                    <div align="left">
+                        <span class="label label-primary">@Resources.Resources.msgToSeeWordsuites</span>
+                    </div>
+                    <input type="hidden" value="@Request.RawUrl" name="returnUrl"/>
+                    <input type="hidden" value="@Model.CurrentPage" name="page"/>
+                    <input type="hidden" id="defaultLanguage" value="@Model.Language"/>
+
+                    <table align="center">
+                        <tr>
+                            <td>@Html.DropDownList("selectedLanguage", Model.LanguageItems,Resources.Resources.txtLanguage,  new { @class = "form-control"})</td>
+                            <td><button type="submit" id="showWordSuites" class="btn btn-default">@Resources.Resources.txtShowWordSuites</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+   }</div>
+<div id="grid-list"></div>
+<script type="text/javascript">
+    
+    var dropDownList = document.getElementById("selectedLanguage");
+
+    $(document).ready(function(){
+        var selectedOption = dropDownList.options[dropDownList.selectedIndex].text;
+        if (selectedOption != "Language") {
+            document.getElementById('showWordSuites').click();
+            
+        }
+    });
+
+
+    var defLang = document.getElementById("defaultLanguage").value;
+
+    setSelectedValue(dropDownList, defLang);
+
+    function setSelectedValue(selectObj, valueToSet) {
+       
+        for (var i = 0; i < selectObj.options.length; i++) {
+            if (selectObj.options[i].text == valueToSet) {
+                selectObj.options[i].selected = true;
+                return;
+            }
+        }
+    } 
+ 
+</script>

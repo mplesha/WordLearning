@@ -1,0 +1,758 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="msgAddedItem" xml:space="preserve">
+    <value>Translation   {0} - {1}   has been added to {2}-{3} dictionary</value>
+  </data>
+  <data name="msgChooseItems" xml:space="preserve">
+    <value>Please, choose one or more items for wordsuite</value>
+  </data>
+  <data name="msgDeletedItem" xml:space="preserve">
+    <value>Item has been deleted</value>
+  </data>
+  <data name="msgEmailError" xml:space="preserve">
+    <value>User with such email is alredy exist</value>
+  </data>
+  <data name="msgEnforcedDelayBetweenAttempts" xml:space="preserve">
+    <value>Enforced delay between attempts</value>
+  </data>
+  <data name="msgEnforcedNumberOfAttempts" xml:space="preserve">
+    <value>Enforced number of attempts</value>
+  </data>
+  <data name="msgErrorMessage" xml:space="preserve">
+    <value>An error occurred while processing your request.</value>
+  </data>
+  <data name="msgErrorPassword" xml:space="preserve">
+    <value>Passwords don't match</value>
+  </data>
+  <data name="msgFindStudent" xml:space="preserve">
+    <value>To find students enter</value>
+  </data>
+  <data name="msgFindUsers" xml:space="preserve">
+    <value>To find users enter</value>
+  </data>
+  <data name="msgFindWords" xml:space="preserve">
+    <value>Enter word you want to find</value>
+  </data>
+  <data name="msgInfoAdvantages" xml:space="preserve">
+    <value>From now on:</value>
+  </data>
+  <data name="msgInfoAdvantages_1" xml:space="preserve">
+    <value>No need to make violence against yourself!</value>
+  </data>
+  <data name="msgInfoAdvantages_2" xml:space="preserve">
+    <value>No more long lists hanging on walls, doors, mirrors!</value>
+  </data>
+  <data name="msgInfoAdvantages_3" xml:space="preserve">
+    <value>No more stickers in your kitchen and bathroom!</value>
+  </data>
+  <data name="msgInfoAdvantages_4" xml:space="preserve">
+    <value>No need to remember which words you have already learnt and which ones you have not</value>
+  </data>
+  <data name="msgInfoAdvantages_5" xml:space="preserve">
+    <value>Study words and have fun!</value>
+  </data>
+  <data name="msgInfoAdvantages_6" xml:space="preserve">
+    <value>If you want to start, please register.</value>
+  </data>
+  <data name="msgInfoHappyWordLearn" xml:space="preserve">
+    <value>Happy WordLearning!!!</value>
+  </data>
+  <data name="msgInfoHelloFriend" xml:space="preserve">
+    <value>Hello Friend!</value>
+  </data>
+  <data name="msgInfoItsForYou" xml:space="preserve">
+    <value>If so, this site is just for you!</value>
+  </data>
+  <data name="msgInfoQuestions" xml:space="preserve">
+    <value>Studying a foreign language?</value>
+  </data>
+  <data name="msgInfoQuestions_2" xml:space="preserve">
+    <value>Having problems in studying a vocabulary?</value>
+  </data>
+  <data name="msgInfoQuestions_3" xml:space="preserve">
+    <value>Cannot make yourself study and repeat new words?</value>
+  </data>
+  <data name="msgInfoQuestions_4" xml:space="preserve">
+    <value>Wanna learn words just playing a game?</value>
+  </data>
+  <data name="msgInfoWordLearn" xml:space="preserve">
+    <value>WordLearn</value>
+  </data>
+  <data name="msgInfoWordLearnTeam" xml:space="preserve">
+    <value>The WordLearn Team</value>
+  </data>
+  <data name="msgItemsAdded" xml:space="preserve">
+    <value>Items have been added</value>
+  </data>
+  <data name="msgNotAddedItem" xml:space="preserve">
+    <value>Sorry, but translation  {0} - {1}  already exists in {2}-{3} dictionary</value>
+  </data>
+  <data name="msgNotDeletedItem" xml:space="preserve">
+    <value>Item has not been deleted</value>
+  </data>
+  <data name="msgPasswordsontMatch" xml:space="preserve">
+    <value>Passwords don't match</value>
+  </data>
+  <data name="msgRequiredField" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
+  <data name="msgToGuest" xml:space="preserve">
+    <value>Hello Guest! You can:</value>
+  </data>
+  <data name="msgToSeeWordsuites" xml:space="preserve">
+    <value>To see wordsuites select language</value>
+  </data>
+  <data name="msgTranslationsExist" xml:space="preserve">
+    <value>Translations from this file already exist or file has wrong format or you didn't choose a file</value>
+  </data>
+  <data name="msgTryPassAgain" xml:space="preserve">
+    <value>You can try to pass Quiz again at:</value>
+  </data>
+  <data name="msgUncorrectEmail" xml:space="preserve">
+    <value>Uncorrect email</value>
+  </data>
+  <data name="msgUncorrectLogin" xml:space="preserve">
+    <value>Incorrect username .Username can contain only _  or latin characters or digits.The length of username must be between 6 and 15 characters</value>
+  </data>
+  <data name="msgUncorrectPhoneNumber" xml:space="preserve">
+    <value>Not a valid number.
+    Valid format: 000-000-00-00
+    </value>
+  </data>
+  <data name="msgUserEmail" xml:space="preserve">
+    <value>User with such email is alredy exist</value>
+  </data>
+  <data name="msgUserName" xml:space="preserve">
+    <value>User with such user name is alredy exist</value>
+  </data>
+  <data name="msgUserNameExist" xml:space="preserve">
+    <value>User with such name is alredy exist</value>
+  </data>
+  <data name="msgWordsuiteIsRequired" xml:space="preserve">
+    <value>Wordsuite name is required</value>
+  </data>
+  <data name="RegisterModel_UserName_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="txt" xml:space="preserve">
+    <value>Enter your username and password</value>
+  </data>
+  <data name="txtAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="txtAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="txtAddCheckedItems" xml:space="preserve">
+    <value>Add checked items</value>
+  </data>
+  <data name="txtAddItem" xml:space="preserve">
+    <value>Add Item</value>
+  </data>
+  <data name="txtAddItemForm" xml:space="preserve">
+    <value>Add Item</value>
+  </data>
+  <data name="txtAddItems" xml:space="preserve">
+    <value>Add Items</value>
+  </data>
+  <data name="txtAddItemsWordsuite" xml:space="preserve">
+    <value>Add Items To Wordsuite</value>
+  </data>
+  <data name="txtAddLanguage" xml:space="preserve">
+    <value>Add Language</value>
+  </data>
+  <data name="txtAddMoreTransl" xml:space="preserve">
+    <value>Add one more translation</value>
+  </data>
+  <data name="txtAddNewTransl" xml:space="preserve">
+    <value>Add new translations</value>
+  </data>
+  <data name="txtAddToCourse" xml:space="preserve">
+    <value>Add To Course</value>
+  </data>
+  <data name="txtAddToWordsuite" xml:space="preserve">
+    <value>Add To Wordsuite</value>
+  </data>
+  <data name="txtAddWordSuite" xml:space="preserve">
+    <value>Add WordSuite</value>
+  </data>
+  <data name="txtAdminPage" xml:space="preserve">
+    <value>Admin Page</value>
+  </data>
+  <data name="txtAllCourses" xml:space="preserve">
+    <value>All courses</value>
+  </data>
+  <data name="txtAllDictionary" xml:space="preserve">
+    <value>All Dictionary</value>
+  </data>
+  <data name="txtAllWordSuites" xml:space="preserve">
+    <value>All WordSuites</value>
+  </data>
+  <data name="txtAnswerIsCorrect" xml:space="preserve">
+    <value>Answer is correct</value>
+  </data>
+  <data name="txtAssignCourse" xml:space="preserve">
+    <value>Assign course</value>
+  </data>
+  <data name="txtAssignCourses" xml:space="preserve">
+    <value>Assign courses</value>
+  </data>
+  <data name="txtAssignments" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="txtAssignTeacher" xml:space="preserve">
+    <value>Assign teacher</value>
+  </data>
+  <data name="txtBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="txtBrowseButton" xml:space="preserve">
+    <value>Browse File...</value>
+  </data>
+  <data name="txtCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="txtChange" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="txtChangeTeacher" xml:space="preserve">
+    <value>Change teacher</value>
+  </data>
+  <data name="txtChooseGender" xml:space="preserve">
+    <value>Choose gender</value>
+  </data>
+  <data name="txtChooseRole" xml:space="preserve">
+    <value>Choose role</value>
+  </data>
+  <data name="txtClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="txtConfirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="txtConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="txtCopyrights" xml:space="preserve">
+    <value>- SoftServe Lv-102.Net</value>
+  </data>
+  <data name="txtCourse" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="txtCourseLanguage" xml:space="preserve">
+    <value>Course language</value>
+  </data>
+  <data name="txtCourses" xml:space="preserve">
+    <value>Courses</value>
+  </data>
+  <data name="txtCourseWordsuites" xml:space="preserve">
+    <value>Course wordsuites</value>
+  </data>
+  <data name="txtCreateCourse" xml:space="preserve">
+    <value>Create course</value>
+  </data>
+  <data name="txtCreateNewCourse" xml:space="preserve">
+    <value>Create new course</value>
+  </data>
+  <data name="txtCreateUser" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="txtCreateWordSuite" xml:space="preserve">
+    <value>Create WordSuite</value>
+  </data>
+  <data name="txtCreator" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="txtCurtailment" xml:space="preserve">
+    <value>Curtailment</value>
+  </data>
+  <data name="txtDateOfBirthday" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="txtDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="txtDictionary" xml:space="preserve">
+    <value>Dictionary</value>
+  </data>
+  <data name="txtDownloadButton" xml:space="preserve">
+    <value>Download Sample</value>
+  </data>
+  <data name="txtEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="txtEditProfilePage" xml:space="preserve">
+    <value>Edit Profile Page</value>
+  </data>
+  <data name="txtEmail" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="txtEnterData" xml:space="preserve">
+    <value> Enter Data</value>
+  </data>
+  <data name="txtError" xml:space="preserve">
+    <value>Error.</value>
+  </data>
+  <data name="txtFemale" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="txtFirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="txtGuest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="txtHideButton" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="txtHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="txtImportButton" xml:space="preserve">
+    <value>Import from file</value>
+  </data>
+  <data name="txtImportedItems" xml:space="preserve">
+    <value>Imported Items From File</value>
+  </data>
+  <data name="txtImportFromFile" xml:space="preserve">
+    <value>Import Items From File</value>
+  </data>
+  <data name="txtInitOriginalLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="txtInitTranslationLanguage" xml:space="preserve">
+    <value>Ukrainian</value>
+  </data>
+  <data name="txtItem" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="txtItems" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="txtLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="txtLanguages" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="txtLastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="txtLearnedDate" xml:space="preserve">
+    <value>Learned date</value>
+  </data>
+  <data name="txtLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="txtLogOut" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="txtMale" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="txtManager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="txtMultilingual" xml:space="preserve">
+    <value>Multilingual</value>
+  </data>
+  <data name="txtMyCourses" xml:space="preserve">
+    <value>My courses</value>
+  </data>
+  <data name="txtMyStudents" xml:space="preserve">
+    <value>My Students</value>
+  </data>
+  <data name="txtMyWork" xml:space="preserve">
+    <value>My Work</value>
+  </data>
+  <data name="txtName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="txtNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="txtNextPage" xml:space="preserve">
+    <value>Next page</value>
+  </data>
+  <data name="txtNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="txtOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="txtOr" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="txtOriginalLanguage" xml:space="preserve">
+    <value>Original Language</value>
+  </data>
+  <data name="txtOriginalWord" xml:space="preserve">
+    <value>Original Word</value>
+  </data>
+  <data name="txtPartOfSpeech" xml:space="preserve">
+    <value>Part of speech</value>
+  </data>
+  <data name="txtPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="txtPersonRole" xml:space="preserve">
+    <value>Person Role</value>
+  </data>
+  <data name="txtPhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="txtPrevious" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="txtPreviousPage" xml:space="preserve">
+    <value>Previous page</value>
+  </data>
+  <data name="txtPrintTable" xml:space="preserve">
+    <value>Print table</value>
+  </data>
+  <data name="txtPrivateCourseWordSuites" xml:space="preserve">
+    <value>Private Course WordSuites</value>
+  </data>
+  <data name="txtPrivateCourseWS" xml:space="preserve">
+    <value>Private course wordsuites</value>
+  </data>
+  <data name="txtProgress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="txtQuiz" xml:space="preserve">
+    <value>Quiz</value>
+  </data>
+  <data name="txtQuizAnswers" xml:space="preserve">
+    <value>Quiz Answers</value>
+  </data>
+  <data name="txtQuizTimeOut" xml:space="preserve">
+    <value>Quiz timeout</value>
+  </data>
+  <data name="txtRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="txtRegisteredUsers" xml:space="preserve">
+    <value>Registered users</value>
+  </data>
+  <data name="txtRegisterPage" xml:space="preserve">
+    <value>Register Page</value>
+  </data>
+  <data name="txtRememberMe" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="txtRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="txtResetPassword" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="txtRightTranslation" xml:space="preserve">
+    <value>Right Translation</value>
+  </data>
+  <data name="txtRunQuiz" xml:space="preserve">
+    <value>Run quiz</value>
+  </data>
+  <data name="txtRunTutorial" xml:space="preserve">
+    <value>Run tutorial</value>
+  </data>
+  <data name="txtSampleFileName" xml:space="preserve">
+    <value>Sample.txt</value>
+  </data>
+  <data name="txtSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="txtSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="txtSearchByTags" xml:space="preserve">
+    <value>Search by tags</value>
+  </data>
+  <data name="txtSearchOnlyOwnWords" xml:space="preserve">
+    <value>Мy words</value>
+  </data>
+  <data name="txtSearchWord" xml:space="preserve">
+    <value>Search a word...</value>
+  </data>
+  <data name="txtSearchWords" xml:space="preserve">
+    <value>Search Words</value>
+  </data>
+  <data name="txtSelectLanguage" xml:space="preserve">
+    <value>Select a language</value>
+  </data>
+  <data name="txtSelectPartOfSpeech" xml:space="preserve">
+    <value>Select a part of speech</value>
+  </data>
+  <data name="txtSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="txtSex" xml:space="preserve">
+    <value>Sex</value>
+  </data>
+  <data name="txtShowWordSuites" xml:space="preserve">
+    <value>Show WordSuites</value>
+  </data>
+  <data name="txtSignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="txtStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="txtStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="txtStudent" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="txtStudentCourses" xml:space="preserve">
+    <value>Student courses</value>
+  </data>
+  <data name="txtStudents" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="txtTags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="txtTeacher" xml:space="preserve">
+    <value>Teacher</value>
+  </data>
+  <data name="txtTeachers" xml:space="preserve">
+    <value>Teachers</value>
+  </data>
+  <data name="txtToCreateNewCourse" xml:space="preserve">
+    <value>To create new course</value>
+  </data>
+  <data name="txtToCreateWS" xml:space="preserve">
+    <value>To create new Wordsuite</value>
+  </data>
+  <data name="txtTranscription" xml:space="preserve">
+    <value>Transcription</value>
+  </data>
+  <data name="txtTranslation" xml:space="preserve">
+    <value>Translation</value>
+  </data>
+  <data name="txtTranslationLanguage" xml:space="preserve">
+    <value>Translation Language</value>
+  </data>
+  <data name="txtTranslationWord" xml:space="preserve">
+    <value>Translation Word</value>
+  </data>
+  <data name="txtUserTranslation" xml:space="preserve">
+    <value>User Translation</value>
+  </data>
+  <data name="txtVerbatim" xml:space="preserve">
+    <value>Verbatim</value>
+  </data>
+  <data name="txtViewCourses" xml:space="preserve">
+    <value>View courses</value>
+  </data>
+  <data name="txtViewItems" xml:space="preserve">
+    <value>View Items</value>
+  </data>
+  <data name="txtViewWordSuites" xml:space="preserve">
+    <value>View WordSuites</value>
+  </data>
+  <data name="txtVocabularies" xml:space="preserve">
+    <value>Languages</value>
+  </data>
+  <data name="txtWord" xml:space="preserve">
+    <value>Word</value>
+  </data>
+  <data name="txtWordSuite" xml:space="preserve">
+    <value>WordSuite</value>
+  </data>
+  <data name="txtWordsuiteName" xml:space="preserve">
+    <value>Wordsuite Name</value>
+  </data>
+  <data name="txtWordSuites" xml:space="preserve">
+    <value>WordSuites</value>
+  </data>
+  <data name="txtWordsuitelanguage" xml:space="preserve">
+    <value>Wordsuite Language</value>
+  </data>
+  <data name="txtRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="txtRenameWordSuite" xml:space="preserve">
+    <value>Rename WordSuite</value>
+  </data>
+  <data name="msgFinishTutor" xml:space="preserve">
+    <value>Finish tutorial</value>
+  </data>
+  <data name="msgAddLenguage" xml:space="preserve">
+    <value>language was added successfully!</value>
+  </data>
+  <data name="msgCreateUser" xml:space="preserve">
+    <value>was created successfully!</value>
+  </data>
+  <data name="msgDeleteLanguage" xml:space="preserve">
+    <value>language was deleted successfully!</value>
+  </data>
+  <data name="msgDeleteUser" xml:space="preserve">
+    <value>was deleted successfully!</value>
+  </data>
+  <data name="msgEditUser" xml:space="preserve">
+    <value>'s profile was edited successfully!</value>
+  </data>
+  <data name="msgResetPassword" xml:space="preserve">
+    <value>Password was reseted successfully!</value>
+  </data>
+  <data name="msgUpdateSetting" xml:space="preserve">
+    <value>Quiz settings was updated successfully!</value>
+  </data>
+  <data name="s" xml:space="preserve">
+    <value />
+  </data>
+  <data name="txtRequiredConfirmPassword" xml:space="preserve">
+    <value>Confirm Password *</value>
+  </data>
+  <data name="txtRequiredEmail" xml:space="preserve">
+    <value>E-mail *</value>
+  </data>
+  <data name="txtRequiredFirstName" xml:space="preserve">
+    <value>First Name *</value>
+  </data>
+  <data name="txtRequiredLastName" xml:space="preserve">
+    <value>Last Name *</value>
+  </data>
+  <data name="txtRequiredLogin" xml:space="preserve">
+    <value>Login *</value>
+  </data>
+  <data name="txtRequiredPassword" xml:space="preserve">
+    <value>Password *</value>
+  </data>
+  <data name="msgCaseLetters" xml:space="preserve">
+    <value>Attention! It's important to consider the case of letters</value>
+  </data>
+  <data name="txtToAllCourses" xml:space="preserve">
+    <value>To all courses</value>
+  </data>
+  <data name="txtSearchByWords" xml:space="preserve">
+    <value>Search by word</value>
+    </data>
+  <data name="msgRemoveCourse" xml:space="preserve">
+    <value>has been removed successfully!</value>
+  </data>
+</root>

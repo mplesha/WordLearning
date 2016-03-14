@@ -1,0 +1,50 @@
+﻿@using DataAccessLayer.Enums
+@Scripts.Render("~/Content/js/printpage.js")
+@model IList<BusinessLayer.Models.WordSuiteTranslationsModel>
+
+<div class="contentgrid">
+    <div align="right">
+        <button class="btn btn-default btn-sm dropdown-toggle own-button" onclick="CallPrint('print')" value="Print table">@Resources.Resources.txtPrintTable</button>
+ <button class="btn btn-default btn-sm dropdown-toggle own-button" value="Back" onclick="javascript: history.go(-1);">@Resources.Resources.txtBack</button>
+    </div>
+    <div id="print">
+        <div align="Left">
+            <span class="label label-primary">@Resources.Resources.txtWordSuite - "@Model[0].CurrentWordSuite.Name"  </span>
+        </div>
+        <table class="table table-bordered table-hover own-grid" border="1">
+            <thead>
+                <tr>
+                    <th>@Resources.Resources.txtItem</th>
+                    <th>@Resources.Resources.txtTranslation</th>
+                    <th>@Resources.Resources.txtPartOfSpeech</th>
+                    <th>@Resources.Resources.txtTranscription</th>
+                    <th>@Resources.Resources.txtTags</th>
+                    <th>@Resources.Resources.txtProgress</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                
+                    <tr>
+                        <td>@Model[i].OriginalItem</td>
+                        <td>@Model[i].TranslatedItem</td>
+                        @if (@Model[i].PartOfSpeech != null)
+                        {<td>@Model[i].PartOfSpeech</td>}
+                        else
+                        {<td></td>}
+                        <td>@Model[i].Transcription</td>
+                        <td>@foreach (var tag in Model[i].TranslationTags)
+                            {
+                                <li>@tag.Name</li>
+                            }
+                        </td>
+                        <td></td>
+                        
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

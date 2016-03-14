@@ -1,0 +1,34 @@
+﻿@using WordLearningMVC
+@model IList<DataAccessLayer.Entities.Course>
+@{
+    ViewBag.Title = Resources.Resources.txtAllCourses;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("CreateNewCourse", "Teacher"))
+{
+    <div class="contentgrid">
+        <div class="modal-content own-grid">
+            <div class="form-group">
+                <div align="left">
+                    <span class="label label-primary">@Resources.Resources.txtToCreateNewCourse</span>
+                </div>
+                <table align="center">
+                    <tr>
+                        <td>@Html.DropDownList("CourseLanguage", new SelectList(ViewBag.OrigLanguages), Resources.Resources.txtSelectLanguage, new { @class = "form-control" })</td>
+                        <td><input type="text" name="CourseName" placeholder="Enter course name" class="form-control"></td>
+                        <td><button type="submit" class="btn btn-default">@Resources.Resources.txtCreateCourse</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+@using (Ajax.BeginForm("CourseWordsuites", "Teacher",
+    new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging" }))
+{
+    <div class="contentgrid" id="grid-list">
+        @Html.Partial("_AllCourses")
+    </div>
+}
+
