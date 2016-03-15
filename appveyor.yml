@@ -1,7 +1,7 @@
 configuration: Release
 
-before_build
+before_build:
   - nuget restore
 
-build
+build:
   publish_wap: true
